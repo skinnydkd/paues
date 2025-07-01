@@ -1,14 +1,24 @@
 <!DOCTYPE html>
-<html lang="ca">
+<html lang='ca'>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset='UTF-8' />
+  <meta name='viewport' content='width=device-width, initial-scale=1.0' />
   <title>Resultat — Aversió al risc</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{
+      --rose-50:#fffdfd;
+      --rose-100:#fff7f9;
+      --rose-200:#ffeef4;
+      --rose-300:#ffd6e2;
+      --rose-400:#ffb3c8;
+    }
+    body{background:var(--rose-50);} /* fons clar */
+  </style>
 </head>
-<body class="bg-cyan-50 flex items-center justify-center min-h-screen text-slate-800">
+<body class="bg-rose-50 flex items-center justify-center min-h-screen text-slate-800">
   <div class="bg-white p-10 rounded-2xl shadow-xl w-full max-w-lg">
-    <h1 class="text-3xl font-extrabold mb-6 text-cyan-700 text-center">Resultat del test</h1>
+    <h1 class="text-3xl font-extrabold mb-6 text-rose-400 text-center">Resultat del test</h1>
 
     <!-- Resum dinàmic -->
     <p id="summary" class="text-2xl font-bold text-center mb-2"></p>
@@ -17,77 +27,35 @@
     <!-- Teoria del risc -->
     <section class="mb-8">
       <h2 class="text-xl font-semibold mb-2">Per què importa el risc?</h2>
-     <p class="text-sm leading-relaxed">
-  Quan parlem de <strong>risc</strong> ens referim al fet que un mateix pla pot acabar bé o malament. 
-  <strong>Incertesa</strong> és no saber amb quina freqüència passarà cada escenari. 
-  Un mètode senzill per posar-hi números és el <em>valor esperat</em>: combinar el que pots guanyar
-  o perdre amb la seua probabilitat. Però perdre 100 € sol fer més mal que guanyar-ne 100,
-  i eixa asimetria explica per què cadascú tria opcions diferents. 
-  Saber fins a quin punt t’incomoda aquesta incertesa t’ajuda a decidir sobre assegurances,
-  inversions, feines i fins i tot activitats d’oci sense penedir-te’n després.
-</p>
-    </section>
-
-    <!-- Situacions on s'aplica -->
-    <section class="mb-8">
-      <h2 class="text-xl font-semibold mb-2">On prenem decisions de risc?</h2>
-      <ul class="list-disc list-inside text-sm leading-relaxed space-y-1">
-        <li><strong>Inversions</strong>: accions, fons, criptomonedes.</li>
-        <li><strong>Assegurances</strong>: salut, cotxe, vivenda.</li>
-        <li><strong>Trajectòria professional</strong>: sou fix vs variable, emprendre.</li>
-        <li><strong>Compra d'actius</strong>: habitatge, cotxe d'ocasió.</li>
-        <li><strong>Estalvi per a jubilació</strong>: immediat vs llarg termini.</li>
-      </ul>
+      <p class="text-sm leading-relaxed">
+        Decidir amb <strong>incertesa</strong> és inevitable: qualsevol pla pot eixir millor o pitjor del previst. El
+        <em>valor esperat</em> combina guanys, pèrdues i probabilitats, però no tots ho percebem igual: perdre 100 € sol fer més mal que guanyar-ne 100. Conèixer la teua aversió al risc t’ajuda a triar assegurances, inversions i fins i tot activitats d’oci sense penedir-te.
+      </p>
     </section>
 
     <!-- Recomanacions segons perfil -->
     <section id="recom" class="text-sm leading-relaxed"></section>
 
-    <a href="index.html" class="inline-block mt-8 text-cyan-700 hover:underline">← Tornar a l'inici</a>
+    <a href="index.html" class="inline-block mt-8 text-rose-400 hover:underline">← Tornar a l'inici</a>
   </div>
 
   <script>
-    const s = parseInt(localStorage.getItem('riskScore')||0);
-    const max = 30; // 10 preguntes × 3 punts
-    const ratio = s / max;
+    const s=parseInt(localStorage.getItem('riskScore')||0);
+    const max=30; // 10 preguntes × 3
+    const r=s/max;
     let cat='',desc='';
-    if(ratio >= 0.66){
-      cat = 'Perfil Alt risc';
-      desc = 'Estàs disposat a córrer grans riscos per aconseguir guanys molt superiors a la mitjana.';
-    } else if(ratio >= 0.33){
-      cat = 'Perfil Risc moderat';
-      desc = 'Cerques un equilibri entre la seguretat i el potencial de creixement.';
-    } else {
-      cat = 'Perfil Baix risc';
-      desc = 'Prefereixes estabilitat i protecció davant pèrdues, fins i tot si renuncies a guanys més grans.';
-    }
-    document.getElementById('summary').innerText = cat + ' (' + s + ' punts)';
-    document.getElementById('desc').innerText = desc;
+    if(r>=0.66){cat='Perfil Alt risc';desc='Disposat a córrer grans riscos a canvi de rendiments alts.';}
+    else if(r>=0.33){cat='Perfil Risc moderat';desc='Cerques equilibri entre seguretat i potencial de creixement.';}
+    else{cat='Perfil Baix risc';desc='Prioritzes estabilitat i evites pèrdues encara que sacrifiques guanys.';}
+    document.getElementById('summary').innerText=cat+' ('+s+' punts)';
+    document.getElementById('desc').innerText=desc;
 
-    const recs = {
-      'Perfil Alt risc': `
-        <h2 class="text-lg font-semibold mb-2">Recomanacions</h2>
-        <ul class="list-disc list-inside space-y-1">
-          <li>Diversifica inversions per a reduir impacte d'un fracàs.</li>
-          <li>Reserva un <em>coixí de seguretat</em> (6 mesos de despeses) per a imprevistos.</li>
-          <li>Considera assegurances que limiten pèrdues catastròfiques.</li>
-        </ul>` ,
-      'Perfil Risc moderat': `
-        <h2 class="text-lg font-semibold mb-2">Recomanacions</h2>
-        <ul class="list-disc list-inside space-y-1">
-          <li>Mantén una cartera mixta entre actius segurs i arriscats.</li>
-          <li>Revisa periòdicament l'exposició al risc segons els teus objectius.</li>
-          <li>Utilitza eines de cobertura (hedging) per a esdeveniments adversos.</li>
-        </ul>` ,
-      'Perfil Baix risc': `
-        <h2 class="text-lg font-semibold mb-2">Recomanacions</h2>
-        <ul class="list-disc list-inside space-y-1">
-          <li>Centra't en productes de capital garantit (dipòsits, bons d'alt grau).</li>
-          <li>Diversifica encara que siga en actius conservadors.</li>
-          <li>Revisa la inflació: massa prudència pot reduir el poder adquisitiu a llarg termini.</li>
-        </ul>`
+    const rec={
+      'Perfil Alt risc':`<h2 class='text-lg font-semibold mb-2 text-rose-400'>Recomanacions</h2><ul class='list-disc list-inside space-y-1'><li>Diversifica inversions per esmorteir un fracàs.</li><li>Mantén un coixí d’emergència de 6 mesos.</li><li>considera assegurances per limitar pèrdues extremes.</li></ul>`,
+      'Perfil Risc moderat':`<h2 class='text-lg font-semibold mb-2 text-rose-400'>Recomanacions</h2><ul class='list-disc list-inside space-y-1'><li>Combina actius segurs i arriscats segons els teus objectius.</li><li>Revisa regularment la teua exposició al risc.</li><li>Utilitza cobertures per a esdeveniments adversos.</li></ul>`,
+      'Perfil Baix risc':`<h2 class='text-lg font-semibold mb-2 text-rose-400'>Recomanacions</h2><ul class='list-disc list-inside space-y-1'><li>Focalitza’t en productes de capital garantit (bons, dipòsits).</li><li>Diversifica en actius conservadors per evitar concentració.</li><li>Revisa la inflació: massa prudència pot minvar el poder adquisitiu.</li></ul>`
     };
-    document.getElementById('recom').innerHTML = recs[cat];
+    document.getElementById('recom').innerHTML=rec[cat];
   </script>
 </body>
 </html>
