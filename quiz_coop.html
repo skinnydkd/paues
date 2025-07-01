@@ -1,27 +1,103 @@
 <!DOCTYPE html>
-<html lang='ca'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1.0'>
-<title>Test cooperació vs individualisme</title><script src="https://cdn.tailwindcss.com"></script>
-<style>.card{transition:all .35s ease;}.card-enter{opacity:0;transform:scale(.9);}
-.card-enter-active{opacity:1;transform:scale(1);}.opt{@apply py-3 px-4 rounded-xl shadow border font-semibold;}</style>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test Cooperació vs Individualisme</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .card{transition:all .35s ease}
+    .card-enter{opacity:0;transform:scale(.9)}
+    .card-enter-active{opacity:1;transform:scale(1)}
+    .opt{@apply py-3 px-4 rounded-xl shadow border font-semibold}
+  </style>
 </head>
-<body class='bg-amber-50 flex items-center justify-center min-h-screen text-slate-800'>
-<div class='w-full max-w-xl'><div id='card' class='card bg-white rounded-2xl shadow-xl p-6 text-center card-enter-active'>
-<h2 id='question' class='text-2xl font-bold mb-6'></h2><div id='options' class='grid gap-4'></div>
-<div class='mt-6 flex items-center space-x-4'><div class='flex-1 bg-slate-200 rounded-full'><div id='progress' class='h-2 bg-amber-500 rounded-full w-0'></div></div><span id='counter' class='text-sm'></span></div>
-</div></div>
+<body class="bg-amber-50 flex items-center justify-center min-h-screen text-slate-800">
+  <div class="w-full max-w-xl">
+    <div id="card" class="card bg-white rounded-2xl shadow-xl p-6 text-center card-enter-active">
+      <h2 id="title" class="text-xl font-bold mb-4"></h2>
+      <p id="explain" class="mb-6 text-sm text-slate-600"></p>
+      <div id="options" class="grid gap-4"></div>
+      <div class="mt-6 flex items-center space-x-4">
+        <div class="flex-1 bg-slate-200 rounded-full"><div id="progress" class="h-2 bg-amber-500 rounded-full w-0"></div></div>
+        <span id="counter" class="text-sm"></span>
+      </div>
+    </div>
+  </div>
+
 <script>
-const qData=[["Presoner: l'altra part pot trair-te; qu\u00e8 fas?", ["Cooperar", "Traicionar", "Acallar-se", "Confessar primer"]], ["Ronda de caf\u00e8s amb amics:", ["Convidar", "Esperar que convide alg\u00fa", "Mai convidar", "Anar-te'n abans"]], ["Gallina (xoc frontal):", ["Apartar-te", "Mantindre rumb", "Reduir velocitat", "Accelerar al m\u00e0xim"]], ["Compartir apunts:", ["Compartir gratis", "Intercanviar", "Vendre'ls", "No compartir"]], ["Projecte grupal:", ["Fer tasca extra", "Fer la teua part", "Delegar la teua part", "No fer res"]], ["Wi\u2011Fi comunitari:", ["\u00das just", "\u00das moderat alt", "Abusar streaming 4K", "Bloquejar altres"]], ["Donaci\u00f3 ben\u00e8fica col\u00b7lectiva:", ["Donar generosament", "Donar poc", "No donar", "Criticar l'acci\u00f3"]], ["Repartir past\u00eds:", ["Talls iguals", "Porci\u00f3 lleugerament major", "Porci\u00f3 gran", "Agafar la meitat"]], ["Dades d'estudi \u00fatils:", ["Publicar obertes", "Compartir amb cr\u00e8dit", "Vendre-les", "Amagar-les"]], ["Acord poc profit\u00f3s per a tu:", ["Mantindre'l", "Renegociar", "Ixir", "Sabotejar"]]];
-let idx=0, score=0;
+const questions = [
+  {
+    game: 'Dilema del Presoner',
+    desc: 'Tots dos sou arrestats. Si tots dos calleu, rebreu 1 any. Si el delates i ell calla, tu quedes lliure i ell rep 3 anys. Si tots dos delateu, 2 anys cadascun.',
+    options: ['Callar (cooperar)', 'Delatar (traïció)', 'Esperar advocat (no col·labora)', 'Acusar encara més']
+  },
+  {
+    game: 'Joc de la Caça (Stag Hunt)',
+    desc: 'Podeu cooperar per caçar un cervo gran (molta carn) o anar sols a per llebres (menys carn). El cervo només s’aconsegueix si tots dos coopereu.',
+    options: ['Anar a pel cervo junts', 'Anar a per llebre en solitari', 'Esperar que l'altre decidisca', 'Espantar els animals (sabotejar)']
+  },
+  {
+    game: 'Joc de la Gallina (Chicken)',
+    desc: 'Dos cotxes s’encaren. Si cap gira, xocen. Qui gira és "gallina" però evita el xoc.',
+    options: ['Girar primer (cedir)', 'No girar (plantar‑se)', 'Reduir velocitat', 'Accelerar contra l'altre']
+  },
+  {
+    game: 'Partida d'Ultimàtum (10 €)',
+    desc: 'Tu proposes el repartiment. Si l'altra persona rebutja, ningú cobra.',
+    options: ['Proposar 5€ i 5€', 'Proposar 7€ per a tu, 3€ per a ell', 'Proposar 9€ per a tu, 1€ per a ell', 'Proposar 10€ per a tu, 0€ per a ell']
+  },
+  {
+    game: 'Joc del Dictador (10 €)',
+    desc: 'Simplement decideixes com repartir, l’altre no pot rebutjar.',
+    options: ['Donar 5€', 'Donar 3€', 'Donar 1€', 'Quedar-te'ls tots']
+  },
+  {
+    game: 'Béns Públics',
+    desc: 'Cada jugador pot aportar 2€ a un pot comú. El pot es multiplica ×1.5 i es reparteix igual.',
+    options: ['Aportar 2€', 'Aportar 1€', 'Aportar 0€', 'Treure diners del pot (trampa)']
+  },
+  {
+    game: 'Tragèdia dels Comuns',
+    desc: 'Pastura comuna per a ovelles. Si tots mantenen 5 ovelles, el prat es regenera. Més de 5 cadascun degrada el prat.',
+    options: ['5 ovelles', '7 ovelles', '10 ovelles', '15 ovelles']
+  },
+  {
+    game: 'Joc de la Confiança (Investment Game)',
+    desc: 'Tu pots enviar fins 10€. El soci rep ×3 i pot tornar‑te’n part o no.',
+    options: ['Enviar 10€', 'Enviar 6€', 'Enviar 2€', 'No enviar res']
+  },
+  {
+    game: 'Voluntaris (Volunteer’s Dilemma)',
+    desc: 'Cal un sol voluntari per solucionar un problema comú. Ser voluntari costa temps, però si ningú es presenta, tots perden.',
+    options: ['Voluntari immediat', 'Esperar i voluntari si ningú', 'No voluntari però contribuir després', 'No fer res']
+  },
+  {
+    game: 'Battle of the Sexes',
+    desc: 'Parella vol eixir. Un prefereix òpera, l’altre futbol. Prefereixen estar junts.',
+    options: ['Cedir al pla de l'altre', 'Proposar terme mig', 'Insistir en el teu pla', 'Cadascú per separat']
+  }
+];
+
+let idx = 0, score = 0;
 function render(){
-  const q=qData[idx];document.getElementById('question').innerText=q[0];
-  const optDiv=document.getElementById('options');optDiv.innerHTML='';
-  q[1].forEach((o,i)=>{const b=document.createElement('button');b.innerText=o;
-    b.className='opt bg-white hover:bg-amber-100 border-amber-300';b.onclick=()=>select(i);optDiv.appendChild(b);});
-  document.getElementById('counter').innerText=(idx+1)+' / '+qData.length;
-  document.getElementById('progress').style.width=(idx/qData.length*100)+'%';
+  const q = questions[idx];
+  document.getElementById('title').innerText = q.game;
+  document.getElementById('explain').innerText = q.desc;
+  const optDiv = document.getElementById('options'); optDiv.innerHTML='';
+  q.options.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.innerText=o;
+    b.className='opt bg-white hover:bg-amber-100 border-amber-300';
+    b.onclick=()=>select(i);
+    optDiv.appendChild(b);
+  });
+  document.getElementById('counter').innerText = (idx+1)+' / '+questions.length;
+  document.getElementById('progress').style.width = (idx/questions.length*100)+'%';
 }
-function select(i){score+=i;idx++;if(idx<qData.length)render();else finish();}
-function finish(){localStorage.setItem('coopScore',score);window.location.href='resultat_coop.html';}
+function select(i){ score += i; idx++; if(idx<questions.length){ render(); } else finish(); }
+function finish(){ localStorage.setItem('coopScore', score); window.location.href='resultat_coop.html'; }
 render();
-</script></body>
+</script>
+</body>
 </html>
