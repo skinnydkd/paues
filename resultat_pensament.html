@@ -7,7 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-emerald-50 flex items-center justify-center min-h-screen text-slate-800">
-  <div class="bg-white p-10 rounded-2xl shadow-xl w-full max-w-lg">
+  <div class="bg-white p-10 rounded-2xl shadow-xl w-full max-w-3xl">
     <h1 class="text-3xl font-extrabold mb-6 text-emerald-700 text-center">Resultat del test</h1>
 
     <!-- Resum dinàmic -->
@@ -18,23 +18,62 @@
     <section class="mb-8">
       <h2 class="text-xl font-semibold mb-2">Què són les escoles de pensament econòmic?</h2>
       <p class="text-sm leading-relaxed">
-        Una <strong>escola de pensament</strong> és un conjunt d’idees, valors i
-        mètodes sobre com funciona l’economia i quin paper hi juguen el mercat i
-        l’Estat. Des del <em>laissez‑faire</em> liberal fins a la planificació
-        central, cadascuna proposa receptes diferents sobre impostos,
-        regulació, béns públics i benestar.
+        Una <strong>escola de pensament</strong> és un conjunt coherent de principis i mètodes sobre com funciona l’economia i quin paper hi juguen les institucions, els mercats i l’Estat. Des del <em>laissez-faire</em> fins a la planificació central, cada escola proposa receptes diferents per abordar impostos, regulació, béns públics i desenvolupament.
       </p>
+    </section>
+
+    <!-- Taula comparativa -->
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-4">Visió panoràmica de les principals escoles</h2>
+      <div class="overflow-x-auto">
+        <table class="min-w-full text-sm text-left border border-slate-300">
+          <thead class="bg-emerald-100 text-slate-700">
+            <tr>
+              <th class="px-4 py-2 border">Escola</th>
+              <th class="px-4 py-2 border">Representants</th>
+              <th class="px-4 py-2 border">Idees fonamentals</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-t">
+              <td class="px-4 py-2 border font-semibold">Liberal / Austríaca</td>
+              <td class="px-4 py-2 border">Mises, Hayek, Friedman</td>
+              <td class="px-4 py-2 border">Mercat lliure, estat mínim, propietat privada i moneda estable; preus com a senyals d’informació.</td>
+            </tr>
+            <tr class="border-t">
+              <td class="px-4 py-2 border font-semibold">Keynesiana / Mixta</td>
+              <td class="px-4 py-2 border">Keynes, Krugman, Mazzucato</td>
+              <td class="px-4 py-2 border">Despesa pública anticíclica, regulació per corregir fallades de mercat, combinació sector privat & estat.</td>
+            </tr>
+            <tr class="border-t">
+              <td class="px-4 py-2 border font-semibold">Planificada / Marxista</td>
+              <td class="px-4 py-2 border">Marx, Luxemburg, O’Connor</td>
+              <td class="px-4 py-2 border">Propietat col·lectiva dels mitjans de producció, planificació democràtica, abolir explotació i desigualtat.</td>
+            </tr>
+            <tr class="border-t">
+              <td class="px-4 py-2 border font-semibold">Ecologista / Decreixentista</td>
+              <td class="px-4 py-2 border">Georgescu-Roegen, Daly, Raworth</td>
+              <td class="px-4 py-2 border">Límits biofísics, economia circular, reduir consum-material, benestar més enllà del PIB.</td>
+            </tr>
+            <tr class="border-t">
+              <td class="px-4 py-2 border font-semibold">Institucionalista</td>
+              <td class="px-4 py-2 border">Veblen, Ayres, North</td>
+              <td class="px-4 py-2 border">Pes de les institucions i normes socials, innovació i governança per millorar l’eficiència i l’equitat.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </section>
 
     <!-- Aplicacions reals -->
     <section class="mb-8">
       <h2 class="text-xl font-semibold mb-2">On marquen diferència?</h2>
       <ul class="list-disc list-inside text-sm leading-relaxed space-y-1">
-        <li><strong>Política fiscal</strong>: nivells d’impostos i despesa pública.</li>
-        <li><strong>Mercat laboral</strong>: grau d’intervenció, salari mínim i sindicats.</li>
-        <li><strong>Regulació</strong>: llibertat d’empresa vs controls de preus i monopolis.</li>
-        <li><strong>Monetària</strong>: independència del banc central o emissió sota mandat polític.</li>
-        <li><strong>Comerç internacional</strong>: lliurecanvisme o proteccionisme.</li>
+        <li><strong>Política fiscal</strong>: impostos i despesa social.</li>
+        <li><strong>Mercat laboral</strong>: salari mínim, sindicats.</li>
+        <li><strong>Regulació</strong>: controls de preus, antimonopoli.</li>
+        <li><strong>Política monetària</strong>: independència del banc central, inflació.</li>
+        <li><strong>Comerç internacional</strong>: lliurecanvisme vs proteccionisme.</li>
       </ul>
     </section>
 
@@ -46,44 +85,26 @@
 
   <script>
     const s = parseInt(localStorage.getItem('pensamentScore')||0);
-    const max = 30; // 10 preguntes × 3 punts
-    const ratio = s / max; // 0 = estatista, 1 = liberal
+    const max = 30;
+    const ratio = s / max;
     let cat='', desc='';
     if(ratio >= 0.66){
-      cat = 'Liberal / Austríac';
-      desc = 'Confies en la lliure competència i veus l’Estat com a àrbitre mínim.';
+      cat='Liberal / Austríac';
+      desc='Confies en mercats i iniciativa privada.';
     } else if(ratio >= 0.33){
-      cat = 'Mixt / Keynesià';
-      desc = 'Creus en un mercat eficient amb intervencions puntuals per corregir fallades.';
+      cat='Mixt / Keynesià';
+      desc='Busques equilibri estat‑mercat.';
     } else {
-      cat = 'Planificat / Marxista';
-      desc = 'Penses que l’Estat ha de dirigir i redistribuir per garantir equitat.';
+      cat='Planificat / Marxista';
+      desc='Prioritzes intervenció i equitat col·lectiva.';
     }
-    document.getElementById('summary').innerText = cat + ' (' + s + ' punts)';
+    document.getElementById('summary').innerText = cat + ' (' + s + ' pts)';
     document.getElementById('desc').innerText = desc;
 
     const rec = {
-      'Liberal / Austríac': `
-        <h2 class="text-lg font-semibold mb-2">Com consolidar la teua visió</h2>
-        <ul class="list-disc list-inside space-y-1">
-          <li>Estudia autors com <em>Hayek</em> i <em>Mises</em>.</li>
-          <li>Analitza l’efecte de la regulació sobre la innovació.</li>
-          <li>Fixa’t en països amb economies obertes i competitives.</li>
-        </ul>` ,
-      'Mixt / Keynesià': `
-        <h2 class="text-lg font-semibold mb-2">Aprofundeix en l’equilibri</h2>
-        <ul class="list-disc list-inside space-y-1">
-          <li>Llig <em>Keynes</em>, <em>Krugman</em> i les crítiques contemporànies.</li>
-          <li>Observa com s’usen estímuls fiscals en recessió.</li>
-          <li>Investiga models nòrdics (mercat + protecció social).</li>
-        </ul>` ,
-      'Planificat / Marxista': `
-        <h2 class="text-lg font-semibold mb-2">Enfoca la justícia social</h2>
-        <ul class="list-disc list-inside space-y-1">
-          <li>Llig <em>Marx</em>, <em>Polanyi</em> i teories post‑capitalistes.</li>
-          <li>Analitza exemples històrics de planificació i els seus reptes.</li>
-          <li>Explora formes modernes de propietat col·lectiva i cooperatives.</li>
-        </ul>`
+      'Liberal / Austríac': `<h2 class='text-lg font-semibold mb-2'>On aprofundir</h2><ul class='list-disc list-inside space-y-1'><li>Lectura de Hayek i Friedman.</li><li>Casos de desregulació exitosa.</li></ul>`,
+      'Mixt / Keynesià': `<h2 class='text-lg font-semibold mb-2'>On aprofundir</h2><ul class='list-disc list-inside space-y-1'><li>Obres de Keynes i Mazzucato.</li><li>Polítiques anticrisi dels països nòrdics.</li></ul>`,
+      'Planificat / Marxista': `<h2 class='text-lg font-semibold mb-2'>On aprofundir</h2><ul class='list-disc list-inside space-y-1'><li>Lectura de Marx, Polanyi.</li><li>Models de cooperatives i planificació democràtica.</li></ul>`
     };
     document.getElementById('recom').innerHTML = rec[cat];
   </script>
