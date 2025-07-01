@@ -16,7 +16,7 @@
     }
     body{background:var(--rose-50);} /* fons clar */
 
-    /* Animacions personalitzades (funcionen sense @apply) */
+    /* Animacions personalitzades */
     @keyframes fade-up{0%{opacity:0;transform:translateY(24px);}100%{opacity:1;transform:translateY(0);}}
     @keyframes bounce-slow{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
     .animate-fade-up{animation:fade-up .6s ease-out forwards;}
@@ -28,7 +28,7 @@
   <nav class="sticky top-0 bg-white/70 backdrop-blur border-b border-rose-200/60 z-10">
     <div class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
       <a href="index.html" class="flex items-center gap-2 text-2xl font-extrabold text-rose-400">
-        <img src="logo.png" alt="Logo PdE" class="h-10 w-auto"/>
+        <img src="logo.png" alt="Logo PdE" class="h-12 w-auto"/>
         <span class="hidden sm:inline">PdE</span>
       </a>
       <button id="toggle" class="sm:hidden outline-none">
@@ -46,7 +46,9 @@
   <!-- Hero -->
   <header class="flex-1 flex items-center justify-center text-center py-16 px-4 bg-gradient-to-b from-rose-100 via-rose-50 to-rose-50">
     <div class="max-w-2xl space-y-6">
-      <img src="piggy.png" alt="Piggy" class="mx-auto h-40 sm:h-48 animate-bounce-slow drop-shadow"/>
+      <div class="mx-auto w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden animate-bounce-slow drop-shadow-lg">
+        <img src="piggy.png" alt="Guardiola" class="object-cover w-full h-full"/>
+      </div>
       <h1 class="text-4xl sm:text-5xl font-extrabold">Descobreix la teua identitat econòmica</h1>
       <p class="text-lg text-slate-600">Tests curts i divertits per entendre com penses, arrisques i col·labores en el dia a dia.</p>
       <a href="#tests" class="inline-block bg-rose-400 text-white rounded-full px-6 py-3 font-semibold shadow-md transition hover:shadow-lg active:scale-95">Comença ara</a>
@@ -57,15 +59,16 @@
   <section id="tests" class="max-w-6xl mx-auto px-4 py-20 space-y-12">
     <h2 class="text-3xl font-bold text-center mb-8">Tria un test</h2>
     <div class="grid gap-8 md:grid-cols-3">
-      <a href="quiz_risc.html" class="group bg-white border-2 border-rose-200 rounded-2xl p-6 shadow-lg transition transform hover:-translate-y-1 hover:shadow-rose-300 active:scale-95 opacity-0">
+      <!-- Card template -->
+      <a href="quiz_risc.html" class="group bg-white border-4 border-rose-300 rounded-2xl p-6 shadow-lg transition transform hover:-translate-y-1 hover:shadow-rose-300 active:scale-95 opacity-0">
         <h3 class="text-xl font-semibold mb-2 group-hover:text-rose-400">Aversió al risc</h3>
         <p class="text-sm text-slate-600">Com et mous entre seguretat i adrenalina?</p>
       </a>
-      <a href="quiz_coop.html" class="group bg-white border-2 border-rose-200 rounded-2xl p-6 shadow-lg transition transform hover:-translate-y-1 hover:shadow-rose-300 active:scale-95 opacity-0">
+      <a href="quiz_coop.html" class="group bg-white border-4 border-rose-300 rounded-2xl p-6 shadow-lg transition transform hover:-translate-y-1 hover:shadow-rose-300 active:scale-95 opacity-0">
         <h3 class="text-xl font-semibold mb-2 group-hover:text-rose-400">Cooperació vs Individualisme</h3>
         <p class="text-sm text-slate-600">Dilemes de teoria de jocs per descobrir com actues amb els altres.</p>
       </a>
-      <a href="quiz_pensament.html" class="group bg-white border-2 border-rose-200 rounded-2xl p-6 shadow-lg transition transform hover:-translate-y-1 hover:shadow-rose-300 active:scale-95 opacity-0">
+      <a href="quiz_pensament.html" class="group bg-white border-4 border-rose-300 rounded-2xl p-6 shadow-lg transition transform hover:-translate-y-1 hover:shadow-rose-300 active:scale-95 opacity-0">
         <h3 class="text-xl font-semibold mb-2 group-hover:text-rose-400">Pensament econòmic</h3>
         <p class="text-sm text-slate-600">Quina escola econòmica encaixa amb tu?</p>
       </a>
@@ -83,11 +86,11 @@
     document.getElementById('year').textContent = new Date().getFullYear();
 
     // menú mòbil
-    const toggle=document.getElementById('toggle');
-    const menu=document.getElementById('menu');
-    toggle?.addEventListener('click',()=>menu.classList.toggle('hidden'));
+    document.getElementById('toggle')?.addEventListener('click',()=>{
+      document.getElementById('menu').classList.toggle('hidden');
+    });
 
-    // animació reveal
+    // reveal on scroll
     const observer=new IntersectionObserver((entries)=>{
       entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('animate-fade-up');observer.unobserve(e.target);}});
     },{threshold:0.1});
