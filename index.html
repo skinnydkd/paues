@@ -16,12 +16,13 @@
     }
     body{background:var(--rose-50);} /* fons molt clar */
 
-    /* Botó principal */
     .btn-rose{@apply bg-rose-400 text-white rounded-full px-6 py-3 font-semibold shadow-md transition hover:shadow-lg active:scale-95 duration-150;}
 
-    /* Animacions Tailwind custom */
+    /* Animacions */
     @keyframes fade-up{0%{opacity:0;transform:translateY(24px);}100%{opacity:1;transform:translateY(0);}}
     .animate-fade-up{animation:fade-up .6s ease-out forwards;}
+    @keyframes bounce-slow{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+    .animate-bounce-slow{animation:bounce-slow 3s infinite;}
   </style>
 </head>
 <body class="min-h-screen flex flex-col font-sans text-slate-800">
@@ -49,7 +50,7 @@
     <div class="max-w-2xl space-y-6">
       <img src="assets/piggy.png" alt="Piggy" class="mx-auto h-36 sm:h-44 animate-bounce-slow drop-shadow">
       <h1 class="text-4xl sm:text-5xl font-extrabold">Descobreix la teua identitat econòmica</h1>
-      <p class="text-lg text-slate-600">Tests curts i visualment divertits per entendre com penses, arrisques i col·labores en l’economia diària.</p>
+      <p class="text-lg text-slate-600">Tests curts i visualment divertits per entendre com penses, arrisques i col·labores. </p>
       <a href="#tests" class="btn-rose inline-block">Comença ara</a>
     </div>
   </header>
@@ -58,7 +59,7 @@
   <section id="tests" class="max-w-6xl mx-auto px-4 py-20 space-y-12">
     <h2 class="text-3xl font-bold text-center">Tria un test</h2>
     <div class="grid gap-8 md:grid-cols-3">
-      <!-- Card component -->
+      <!-- Card component template -->
       <a href="quiz_risc.html" class="test-card group">
         <h3 class="card-title">Aversió al risc</h3>
         <p class="card-desc">Com et mous entre seguretat i adrenalina?</p>
@@ -81,32 +82,21 @@
 
   <!-- Scripts -->
   <script>
-    // any dinàmic
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Mobile menu toggle
-    const toggle=document.getElementById('toggle');
-    const menu=document.getElementById('menu');
+    const toggle=document.getElementById('toggle'); const menu=document.getElementById('menu');
     toggle?.addEventListener('click',()=>menu.classList.toggle('hidden'));
-
     // Reveal on scroll
     const observer=new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){e.target.classList.add('animate-fade-up');observer.unobserve(e.target);}
-      });
+      entries.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('animate-fade-up');observer.unobserve(e.target);} });
     },{threshold:0.1});
     document.querySelectorAll('.test-card').forEach(el=>observer.observe(el));
   </script>
 
   <!-- Tailwind component classes -->
   <style>
-    .test-card{@apply bg-white border border-rose-200 rounded-2xl p-6 shadow transition transform hover:-translate-y-1 hover:shadow-lg active:scale-95 opacity-0;} /* hidden initial for animation */
+    .test-card{@apply bg-white border-2 border-rose-200 rounded-2xl p-6 shadow-lg transition transform hover:-translate-y-1 hover:shadow-rose-300 active:scale-95 opacity-0;}
     .card-title{@apply text-xl font-semibold mb-2 group-hover:text-rose-400;}
     .card-desc{@apply text-sm text-slate-600;}
-
-    /* slow bounce */
-    @keyframes bounce-slow{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
-    .animate-bounce-slow{animation:bounce-slow 3s infinite;}
   </style>
 </body>
 </html>
