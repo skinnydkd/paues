@@ -5,10 +5,20 @@
   <meta name='viewport' content='width=device-width, initial-scale=1.0' />
   <title>Resultat — Pensament econòmic</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --rose-50: #fffdfd;
+      --rose-100: #fff7f9;
+      --rose-200: #ffeef4;
+      --rose-300: #ffd6e2;
+      --rose-400: #ffb3c8;
+    }
+    body { background: var(--rose-50); }
+  </style>
 </head>
-<body class="bg-emerald-50 flex items-center justify-center min-h-screen text-slate-800">
+<body class="bg-rose-50 flex items-center justify-center min-h-screen text-slate-800">
   <div class="bg-white p-10 rounded-2xl shadow-xl w-full max-w-3xl">
-    <h1 class="text-3xl font-extrabold mb-6 text-emerald-700 text-center">Resultat del test</h1>
+    <h1 class="text-3xl font-extrabold mb-6 text-rose-400 text-center">Resultat del test</h1>
 
     <!-- Resum dinàmic -->
     <p id="summary" class="text-2xl font-bold text-center mb-2"></p>
@@ -28,7 +38,7 @@
       <h2 class="text-xl font-semibold mb-4">Mapa ràpid de les principals escoles</h2>
       <div class="overflow-x-auto">
         <table class="min-w-full text-sm text-left border border-slate-300">
-          <thead class="bg-emerald-100 text-slate-700">
+          <thead class="bg-rose-100 text-slate-700">
             <tr>
               <th class="px-4 py-2 border">Escola</th>
               <th class="px-4 py-2 border">Representants</th>
@@ -53,12 +63,12 @@
     <!-- Recomanacions segons perfil -->
     <section id="recom" class="text-sm leading-relaxed"></section>
 
-    <a href="index.html" class="inline-block mt-8 text-emerald-700 hover:underline">← Tornar a l'inici</a>
+    <a href="index.html" class="inline-block mt-8 text-rose-400 hover:underline">← Tornar a l'inici</a>
   </div>
 
 <script>
   const s = parseInt(localStorage.getItem('pensamentScore')||0);
-  const max = 60; // 15 preguntes × 4 punts
+  const max = 60;
   const ratio = s / max;
   let cat='', desc='';
   if(ratio >= 0.66){
@@ -76,35 +86,35 @@
 
   const rec = {
     'Liberal / Austríac': `
-      <h2 class='text-lg font-semibold mb-2'>Per aprofundir (similars)</h2>
+      <h2 class='text-lg font-semibold mb-2 text-rose-400'>Per aprofundir (similars)</h2>
       <ul class='list-disc list-inside space-y-1'>
         <li>Adam Smith – <em>La riquesa de les nacions</em></li>
         <li>Milton Friedman – <em>Capitalism and Freedom</em></li>
       </ul>
-      <h2 class='text-lg font-semibold mt-4 mb-2'>Autors contraris</h2>
+      <h2 class='text-lg font-semibold mt-4 mb-2 text-rose-400'>Autors contraris</h2>
       <ul class='list-disc list-inside space-y-1'>
         <li>John Maynard Keynes</li>
         <li>Karl Marx</li>
       </ul>` ,
     'Mixt / Keynesià': `
-      <h2 class='text-lg font-semibold mb-2'>Per aprofundir (similars)</h2>
+      <h2 class='text-lg font-semibold mb-2 text-rose-400'>Per aprofundir (similars)</h2>
       <ul class='list-disc list-inside space-y-1'>
         <li>Mariana Mazzucato – <em>El valor de les coses</em></li>
         <li>Paul Krugman – <em>The Return of Depression Economics</em></li>
       </ul>
-      <h2 class='text-lg font-semibold mt-4 mb-2'>Autors contraris</h2>
+      <h2 class='text-lg font-semibold mt-4 mb-2 text-rose-400'>Autors contraris</h2>
       <ul class='list-disc list-inside space-y-1'>
         <li>Friedrich Hayek</li>
         <li>Milton Friedman</li>
         <li>Karl Marx</li>
       </ul>` ,
     'Planificat / Marxista': `
-      <h2 class='text-lg font-semibold mb-2'>Per aprofundir (similars)</h2>
+      <h2 class='text-lg font-semibold mb-2 text-rose-400'>Per aprofundir (similars)</h2>
       <ul class='list-disc list-inside space-y-1'>
         <li>Karl Polanyi – <em>La gran transformació</em></li>
         <li>Rosa Luxemburg – <em>La acumulación de capital</em></li>
       </ul>
-      <h2 class='text-lg font-semibold mt-4 mb-2'>Autors contraris</h2>
+      <h2 class='text-lg font-semibold mt-4 mb-2 text-rose-400'>Autors contraris</h2>
       <ul class='list-disc list-inside space-y-1'>
         <li>Friedrich Hayek</li>
         <li>Milton Friedman</li>
