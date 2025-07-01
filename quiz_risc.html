@@ -36,18 +36,59 @@
   </div>
 
 <script>
-const questions=[
-  {game:'Repte esportiu',desc:'Vols mantenir-te actiu el cap de setmana; cada activitat té risc diferent.',options:['Caminar 5 km pel parc','Ciclisme de carretera suau 20 km','Escalada indoor en rocòdrom','Cursa d’obstacles amb fang i salts de 2 m']},
-  {game:'Compra de cotxe nou vs ocasió',desc:'Necessites vehicle per treballar. Un cotxe nou té garantia de 5 anys però és més car; el d\'ocasió és barat però pot requerir reparacions cares inesperades.',options:['Cotxe nou amb garantia','Semi-nou certificat','Ocasió amb historial','Subhasta sense historial']},
-  {game:'Assegurança mèdica privada',desc:'La teua empresa ofereix assegurança que costa 600 € l\'any. Sense ella, hi ha un 1 % de probabilitat d\'haver de pagar 20.000 €.',options:['Contractar assegurança','Crear fons d\'emergència','Assumir risc sense fons','Ignorar i gastar els diners']},
-  {game:'Sou fix vs comissions',desc:'Oferta A: sou fix de 2.200 €/mes. Oferta B: base 1.100 € + comissions incertes.',options:['Sou fix 2.200 €','Sou 1.700 € mixte','Sou base i comissió alta','Només comissions']},
-  {game:'Loteria solidària',desc:'Donar 10 € a una causa o comprar bitllets amb premi de 100.000 € (1/20.000).',options:['Donar sense bitllet','Comprar 1 bitllet','Comprar per 30 €','Comprar per 100 €']},
-  {game:'Carrera emprenedora',desc:'Invertir 15.000 € en start‑up amb 20 % d\'èxit (×10) i 60 % de perdre-ho.',options:['Rebutjar i estalviar','Invertir 5.000 €','Invertir 15.000 €','Deixar feina i invertir temps complet']},
-  {game:'Hipoteca fixa vs variable',desc:'Fixa 3 % o variable Euríbor+0,3 %; pot pujar al 5 % o baixar a l’1 %.',options:['Fixa 3 %','Variable amb sostre','Variable pura','Esperar 2 anys']},
-  {game:'Vacances amb assegurança',desc:'Vacances 2.000 € no reemborsables o 2.200 € amb assegurança. 10 % de no poder viatjar.',options:['Pagar assegurança','Reserva econòmica + assegurança parcial','Reservar sense assegurança','Esperar última hora']},
-  {game:'Criptomoneda emergent',desc:'Token que pot pujar 300 % o caure 90 % en un any.',options:['No invertir','Invertir 500 €','Invertir 1.500 €','Invertir 5.000 € apalancat']},
-  {game:'Fons de jubilació',desc:'25 anys per jubilar-te. Pla garantitzat 1 % vs variable 6 %.',options:['Pla garantitzat','Pla objectiu 3 %','Pla variable 6 %','Accions d’alt risc']}
+const questions = [
+  {
+    game: 'Repte esportiu',
+    desc: 'És dissabte al matí i tens ganes de moure’t. Vols fer una activitat física, però no vols posar-te en risc innecessàriament. Cada opció suposa un nivell diferent d’esforç, perill i adrenalina. Quina tries?',
+    options: ['Passeig tranquil de 5 km pel parc', 'Ruta de ciclisme suau de 20 km per carretera secundària', 'Sessió d’escalada indoor en un rocòdrom amb monitor', 'Participació en una cursa d’obstacles amb fang i salts de més de 2 metres']
+  },
+  {
+    game: 'Compra de cotxe nou vs ocasió',
+    desc: 'Necessites comprar un cotxe per anar a treballar diàriament. Un cotxe nou implica una despesa alta però amb garantia, mentre que un cotxe d’ocasió pot ser molt més econòmic, però amaga incògnites i possibles reparacions cares. Quina opció et sembla més encertada?',
+    options: ['Comprar un cotxe nou amb 5 anys de garantia', 'Comprar un semi-nou certificat amb revisions passades', 'Comprar un cotxe d’ocasió amb historial desconegut', 'Participar en una subhasta amb vehicles sense cap tipus d’informació']
+  },
+  {
+    game: 'Assegurança mèdica privada',
+    desc: 'Et planteges si contractar una assegurança mèdica privada. Té un cost de 600 € anuals, però et cobreix qualsevol imprevist greu. En canvi, sense assegurança, hi ha una petita probabilitat d’haver de pagar un tractament car. Com enfoques aquest risc?',
+    options: ['Contractar l’assegurança i dormir tranquil', 'Estalviar per crear un fons d’emergència personal', 'Assumir el risc sense cap fons, però vigilant despeses', 'Ignorar completament el tema i gastar els diners en altres coses']
+  },
+  {
+    game: 'Sou fix vs comissions',
+    desc: 'T’han ofert dos llocs de treball: un amb un sou estable de 2.200 € al mes, i un altre amb una part variable que depèn del teu rendiment. El segon pot donar-te més diners… o menys. Quin tipus de salari prefereixes?',
+    options: ['Sou fix de 2.200 € al mes', 'Sou mixt: 1.700 € amb comissions', 'Base baixa i comissió alta, amb potencial gran', 'Només comissions, però amb molta llibertat i risc']
+  },
+  {
+    game: 'Loteria solidària',
+    desc: 'Tens 10 € i et planteges ajudar una ONG. Però també tens l’opció de comprar loteria d’una rifa solidària on pots guanyar 100.000 €, tot i que la probabilitat és molt baixa (1 entre 20.000). Què tries?',
+    options: ['Fer la donació directa sense esperar res a canvi', 'Comprar un bitllet solidari de 10 €', 'Invertir 30 € en 3 bitllets', 'Invertir 100 € en 10 bitllets i maximitzar opcions']
+  },
+  {
+    game: 'Carrera emprenedora',
+    desc: 'Un amic et proposa invertir en una start‑up molt prometedora. Invertir pot portar guanys espectaculars si tot va bé, però també pots perdre-ho tot. Com reacciones davant aquesta oportunitat?',
+    options: ['Rebutjar l’oferta i mantenir els estalvis segurs', 'Invertir només 5.000 €, per si de cas', 'Anar fort i invertir 15.000 €', 'Deixar la feina i dedicar-t’hi a temps complet']
+  },
+  {
+    game: 'Hipoteca fixa vs variable',
+    desc: 'Has de contractar una hipoteca. Pots triar una quota fixa del 3 % durant 30 anys, o una variable que pot pujar o baixar segons l’Euríbor. Quina tria et fa sentir més segur o esperançat?',
+    options: ['Quota fixa al 3 %, sense sorpreses', 'Quota variable però amb sostre màxim establert', 'Quota totalment variable sense límits', 'Esperar un parell d’anys per veure com evoluciona el mercat']
+  },
+  {
+    game: 'Vacances amb assegurança',
+    desc: 'Estàs a punt de reservar unes vacances per valor de 2.000 €. Existeix la possibilitat d’haver d’anul·lar-les (10 %). Per evitar perdre-ho tot, pots pagar una assegurança. Com actues?',
+    options: ['Pagar 200 € d’assegurança per recuperar-ho tot si cal', 'Fer una reserva més econòmica amb assegurança parcial', 'Reservar sense assegurança per estalviar diners', 'Esperar a última hora per decidir']
+  },
+  {
+    game: 'Criptomoneda emergent',
+    desc: 'T’han parlat d’una criptomoneda nova que podria pujar un 300 % en un any… però també pot caure un 90 %. T’atrau el risc, però no vols perdre-ho tot. Quina és la teua decisió?',
+    options: ['No invertir-hi res', 'Invertir 500 € per provar', 'Invertir 1.500 € per rendibilitat mitjana', 'Invertir 5.000 € amb apalancament per maximitzar guanys']
+  },
+  {
+    game: 'Fons de jubilació',
+    desc: 'Et queden 25 anys per jubilar-te i estàs decidint com invertir per al futur. Tens opcions des d’un pla segur però poc rendible fins a una estratègia amb risc alt però guanys potencials elevats. Quin enfocament prefereixes?',
+    options: ['Triar un pla garantitzat amb rendiment segur de l’1 %', 'Un pla mixt amb objectiu del 3 %', 'Un pla variable amb esperat 6 %', 'Invertir directament en accions d’alt risc per buscar grans beneficis']
+  }
 ];
+
 let idx=0,score=0;
 function render(){
   const q=questions[idx];
