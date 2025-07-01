@@ -1,88 +1,163 @@
 <!DOCTYPE html>
-<html lang="ca">
+<html lang='ca'>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Test d'aversió al risc</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    .card{transition:all .35s ease}
-    .card-enter{opacity:0;transform:scale(.9)}
-    .card-enter-active{opacity:1;transform:scale(1)}
-    .opt{@apply py-3 px-4 rounded-xl shadow border font-semibold}
-  </style>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>🧠 Test d'identitat econòmica</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  .card{transition:all .35s ease}
+  .card-enter{opacity:0;transform:scale(.9)}
+  .card-enter-active{opacity:1;transform:scale(1)}
+  .opt{@apply py-3 px-4 rounded-xl shadow border font-semibold text-left}
+</style>
 </head>
-<body class="bg-cyan-50 flex items-center justify-center min-h-screen text-slate-800">
-  <div class="w-full max-w-xl">
-    <div id="card" class="card bg-white rounded-2xl shadow-xl p-6 text-center card-enter-active">
-      <h2 id="title" class="text-xl font-bold mb-4"></h2>
-      <p id="explain" class="mb-6 text-sm text-slate-600"></p>
-      <div id="options" class="grid gap-4"></div>
-      <div class="mt-6 flex items-center space-x-4">
-        <div class="flex-1 bg-slate-200 rounded-full"><div id="progress" class="h-2 bg-cyan-500 rounded-full w-0"></div></div>
-        <span id="counter" class="text-sm"></span>
+<body class='bg-cyan-50 min-h-screen flex items-center justify-center px-4 text-slate-800'>
+  <div class='w-full max-w-2xl'>
+    <div id='card' class='card bg-white rounded-2xl shadow-xl p-6 card-enter-active'>
+      <h2 id='title' class='text-xl font-bold mb-3'></h2>
+      <p id='explain' class='text-sm text-slate-600 mb-6'></p>
+      <div id='options' class='grid gap-4'></div>
+      <div class='mt-6 flex items-center space-x-4'>
+        <div class='flex-1 bg-slate-200 rounded-full'><div id='progress' class='h-2 bg-emerald-500 rounded-full w-0'></div></div>
+        <span id='counter' class='text-sm'></span>
       </div>
     </div>
   </div>
 
 <script>
-/*
-  Cada objecte conté:
-    game: Títol descriptiu de la situació de risc
-    desc: Explicació breu però profunda de la decisió i les seves conseqüències
-    options: 4 opcions de menor a major risc (0 → conservador, 3 → arriscat)
-*/
 const questions = [
   {
-    game: 'Inversió de renda fixa vs renda variable',
-    desc: 'Tens 10 000 € estalviats. Pots col·locar-los en bons governamentals al 2 % anual garantit o en un fons d\'accions globals amb una rendibilitat mitjana del 8 % però amb alts altibaixos (anys de -20 %).',
-    options: ['Bons governamentals 2 %', 'Fons mixt 50 / 50', 'Fons accions globals', 'Opció d\'accions emergents altament volàtil']
+    game:'Crisi i reactivació',
+    desc:'Un país amb alt atur i deute públic ha de reactivar l’economia. Què hauria de prioritzar?',
+    options:[
+      'Incentivar el consum i l’ocupació amb despesa pública',
+      'Reduir impostos i deregular el mercat',
+      'Nacionalitzar sectors claus i planificar l’activitat',
+      'Modernitzar l’administració i invertir en innovació',
+      'Reduir la producció i el consum a nivell sistèmic'
+    ]
   },
   {
-    game: 'Compra d’un cotxe nou vs d\'ocasió',
-    desc: 'Necessites vehicle per a treballar. Un cotxe nou té garantia 5 anys però és més car; el d\'ocasió és barat però pot requerir reparacions cares inesperades.',
-    options: ['Cotxe nou amb garantia', 'Semi-nou certificat', 'D\'ocasió particular amb historial', 'Subhasta sense historial']
+    game:'Riquesa empresarial',
+    desc:'Una empresa genera beneficis extraordinaris. Com hauria d’actuar?',
+    options:[
+      'Repartir dividends entre els accionistes',
+      'Compartir beneficis amb la plantilla',
+      'Reinvertir per estimular demanda i ocupació',
+      'Convertir part del capital en Bitcoin com a reserva',
+      'Destinar part a compensació ambiental i comunitària'
+    ]
   },
   {
-    game: 'Assegurança mèdica opcional',
-    desc: 'La teua empresa ofereix una assegurança privada que costa 600 € anuals. Sense ella, hi ha un 1 % d\'opció d\'una factura mèdica de 20 000 € que hauries d\'assumir.',
-    options: ['Contractar assegurança', 'Crear fons d\'emergència propi', 'Assumir risc sense fons', 'Ignorar i gastar els diners en oci']
+    game:'Habitatge i especulació',
+    desc:'El preu de l’habitatge s’ha disparat en poques dècades. Què hauria de fer el govern?',
+    options:[
+      'No intervenir: el mercat s’autorregula',
+      'Limitar preus i garantir lloguer social',
+      'Construir habitatge públic i incentivar cooperatives',
+      'Prohibir compra especulativa i taxar segones residències',
+      'Establir crèdits fiscals només per a residents'
+    ]
   },
   {
-    game: 'Sou fix versus comissions',
-    desc: 'Una oferta de feina amb sou fix de 2 200 € o una altra amb sou base de 1 100 € + comissions que poden doblar el salari però no són segures.',
-    options: ['Sou fix 2 200 €', 'Sou 1 700 € mixte', 'Sou base 1 100 € + comissió alta', 'Només comissions (pot ser 0)']
+    game:'Sistema monetari',
+    desc:'Els bancs comercials creen diners via crèdit. És un sistema just?',
+    options:[
+      'És beneficiós i fomenta el creixement',
+      'Cal controlar-ho amb banca pública',
+      'Tornar a diners amb suport tangible',
+      'Abolir-ho i crear banca comuna democràtica',
+      'Crear monedes digitals públiques obertes'
+    ]
   },
   {
-    game: 'Loteria local solidària',
-    desc: 'Pots donar 10 € a una causa i obtindre un bitllet. Premi: 100 000 € amb probabilitat 1/20 000. O pots donar directament els 10 € sabent que ajudaran.',
-    options: ['Donar sense bitllet', 'Bitllet únic', 'Bitllets per valor de 30 €', 'Destinar 100 € en bitllets']
+    game:'Innovació i IA',
+    desc:'L’automatització substitueix llocs. Quina resposta és millor?',
+    options:[
+      'Deixar que la iniciativa privada s’adapte',
+      'Redistribuir guanys amb una renda bàsica',
+      'Prohibir substitució sense consens social',
+      'Redefinir producció amb menys treball i consum',
+      'Regular i compartir patents d’IA de manera oberta'
+    ]
   },
   {
-    game: 'Carrera emprenedora',
-    desc: 'T\'ofereixen ser soci en una start‑up. Hi ha un 20 % de probabilitat de multiplicar per 10 la inversió i un 60 % de perdre-la. Et demanen 15 000 € d\'aportació inicial.',
-    options: ['Rebutjar i estalviar', 'Invertir 5 000 €', 'Invertir 15 000 €', 'Deixar la teua feina i invertir a temps complet']
+    game:'Comerç internacional',
+    desc:'Un país en desenvolupament vol protegir la indústria. És legítim?',
+    options:[
+      'Mantenir lliure comerç sense barreres',
+      'Protegir fins que siga competitiu',
+      'Crear aliances regionals autònomes',
+      'Només permetre-ho si respecta drets socials i ecològics',
+      'Aplicar aranzels verds per fomentar producció local'
+    ]
   },
   {
-    game: 'Hipoteca variable',
-    desc: 'Pots triar hipoteca fixa al 3 % o variable Euríbor +0,3. El banc et mostra escenaris: podria pujar al 5 % o baixar al 1 %.',
-    options: ['Fixa 3 %', 'Variable amb sostre', 'Variable pura', 'Endarrerir la compra i esperar 2 anys']
+    game:'Criptomonedes',
+    desc:'Pot Bitcoin substituir els diners tradicionals?',
+    options:[
+      'No, és massa volàtil i insegur',
+      'Sí, perquè és descentralitzat i lliure',
+      'Només si es regula fiscalment',
+      'Cal crear criptomonedes públiques o comunitàries',
+      'Adoptar stablecoins vinculades a actius reals'
+    ]
   },
   {
-    game: 'Presa de decisions vacacionals amb assegurança de cancel·lació',
-    desc: 'Vacances de 2 000 € no reemborsables o pagar 2 200 € amb assegurança de cancel·lació total. 10 % de probabilitat que no pugues viatjar.',
-    options: ['Pagar assegurança', 'Reservar econòmic amb assegurança parcial', 'Reservar sense assegurança', 'Esperar última hora (pot ser més car)']
+    game:'Desigualtats',
+    desc:'L’1 % més ric acumula gran part de la riquesa mundial. Què s’hauria de fer?',
+    options:[
+      'No fer res: és resultat del mercat',
+      'Imposar impostos extraordinaris a fortunes',
+      'Abolir la propietat privada dels mitjans',
+      'Redistribuir via serveis públics i renda bàsica',
+      'Promoure participació de treballadors en el capital'
+    ]
   },
   {
-    game: 'Criptomoneda emergent',
-    desc: 'Nou token amb volatilitat extrema: pot pujar 300 % o caure 90 % en un any. Inverteixes amb la idea de trading especulatiu.',
-    desc2: '',
-    options: ['No invertir', 'Invertir 500 €', 'Invertir 1 500 €', 'Invertir 5 000 € amb apalancament']
+    game:'Sostenibilitat',
+    desc:'El planeta està al límit ecològic. Quin model econòmic és més adequat?',
+    options:[
+      'Confiar en la innovació per continuar creixent',
+      'Orientar l’economia a sectors verds',
+      'Reduir consum i producció de forma sistemàtica',
+      'Planificar ecològicament els recursos',
+      'Aplicar taxes globals de carboni'
+    ]
   },
   {
-    game: 'Fons de jubilació',
-    desc: 'Pots fer aportació a pla garantitzat 1 % o pla variable amb objectiu 6 %. Tens 25 anys per jubilar‑te.',
-    options: ['Pla garantitzat', 'Pla objectiu 3 %', 'Pla variable 6 %', 'Accions individuals d\'alt risc']
+    game:'Finalitat de l’economia',
+    desc:'Quina hauria de ser la finalitat principal de l’economia?',
+    options:[
+      'Maximitzar creixement i productivitat',
+      'Garantir benestar material i emocional',
+      'Eliminar dominació i desigualtat estructural',
+      'Assegurar sostenibilitat amb el planeta',
+      'Fomentar la creativitat i la cooperació'
+    ]
+  },
+  {
+    game:'Impostos',
+    desc:'Quin sistema fiscal és preferible?',
+    options:[
+      'Impostos mínims i pla tarifari únic',
+      'Sistema progressiu redistributiu',
+      'Eliminar impostos privats i col·lectivitzar',
+      'Fiscalitat verda i d’impacte',
+      'Flat tax moderat amb alguns incentius'
+    ]
+  },
+  {
+    game:'Propietat privada',
+    desc:'Com hauria de ser la propietat dels mitjans de producció?',
+    options:[
+      'Totalment privada i lliure',
+      'Privada però limitada per criteris socials',
+      'Propietat col·lectiva',
+      'Models cooperatius i comunitaris',
+      'Infraestructures clau en mans públiques'
+    ]
   }
 ];
 
@@ -95,126 +170,15 @@ function render(){
   q.options.forEach((o,i)=>{
     const b=document.createElement('button');
     b.innerText=o;
-    b.className='opt bg-white hover:bg-cyan-100 border-cyan-300';
+    b.className='opt bg-white hover:bg-emerald-100 border-emerald-300';
     b.onclick=()=>select(i);
     optDiv.appendChild(b);
   });
   document.getElementById('counter').innerText = (idx+1)+' / '+questions.length;
   document.getElementById('progress').style.width = (idx/questions.length*100)+'%';
 }
-function select(i){ score += i; idx++; if(idx < questions.length){ render(); } else finish(); }
-function finish(){ localStorage.setItem('riskScore', score); window.location.href='resultat_risc.html'; }
+function select(i){ score += (4-i); idx++; if(idx < questions.length){ render(); } else finish(); }
+function finish(){ localStorage.setItem('pensamentScore', score); window.location.href='resultat_pensament.html'; }
 render();
 </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="ca">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Test d'aversió al risc</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    .card{transition:all .35s ease}
-    .card-enter{opacity:0;transform:scale(.9)}
-    .card-enter-active{opacity:1;transform:scale(1)}
-    .opt{@apply py-3 px-4 rounded-xl shadow border font-semibold}
-  </style>
-</head>
-<body class="bg-cyan-50 flex items-center justify-center min-h-screen text-slate-800">
-  <div class="w-full max-w-xl">
-    <div id="card" class="card bg-white rounded-2xl shadow-xl p-6 text-center card-enter-active">
-      <h2 id="title" class="text-xl font-bold mb-4"></h2>
-      <p id="explain" class="mb-6 text-sm text-slate-600"></p>
-      <div id="options" class="grid gap-4"></div>
-      <div class="mt-6 flex items-center space-x-4">
-        <div class="flex-1 bg-slate-200 rounded-full"><div id="progress" class="h-2 bg-cyan-500 rounded-full w-0"></div></div>
-        <span id="counter" class="text-sm"></span>
-      </div>
-    </div>
-  </div>
 
-<script>
-/*
-  Cada objecte conté:
-    game: Títol descriptiu de la situació de risc
-    desc: Explicació breu però profunda de la decisió i les seves conseqüències
-    options: 4 opcions de menor a major risc (0 → conservador, 3 → arriscat)
-*/
-const questions = [
-  {
-    game: 'Inversió de renda fixa vs renda variable',
-    desc: 'Tens 10 000 € estalviats. Pots col·locar-los en bons governamentals al 2 % anual garantit o en un fons d\'accions globals amb una rendibilitat mitjana del 8 % però amb alts altibaixos (anys de -20 %).',
-    options: ['Bons governamentals 2 %', 'Fons mixt 50 / 50', 'Fons accions globals', 'Opció d\'accions emergents altament volàtil']
-  },
-  {
-    game: 'Compra d’un cotxe nou vs d\'ocasió',
-    desc: 'Necessites vehicle per a treballar. Un cotxe nou té garantia 5 anys però és més car; el d\'ocasió és barat però pot requerir reparacions cares inesperades.',
-    options: ['Cotxe nou amb garantia', 'Semi-nou certificat', 'D\'ocasió particular amb historial', 'Subhasta sense historial']
-  },
-  {
-    game: 'Assegurança mèdica opcional',
-    desc: 'La teua empresa ofereix una assegurança privada que costa 600 € anuals. Sense ella, hi ha un 1 % d\'opció d\'una factura mèdica de 20 000 € que hauries d\'assumir.',
-    options: ['Contractar assegurança', 'Crear fons d\'emergència propi', 'Assumir risc sense fons', 'Ignorar i gastar els diners en oci']
-  },
-  {
-    game: 'Sou fix versus comissions',
-    desc: 'Una oferta de feina amb sou fix de 2 200 € o una altra amb sou base de 1 100 € + comissions que poden doblar el salari però no són segures.',
-    options: ['Sou fix 2 200 €', 'Sou 1 700 € mixte', 'Sou base 1 100 € + comissió alta', 'Només comissions (pot ser 0)']
-  },
-  {
-    game: 'Loteria local solidària',
-    desc: 'Pots donar 10 € a una causa i obtindre un bitllet. Premi: 100 000 € amb probabilitat 1/20 000. O pots donar directament els 10 € sabent que ajudaran.',
-    options: ['Donar sense bitllet', 'Bitllet únic', 'Bitllets per valor de 30 €', 'Destinar 100 € en bitllets']
-  },
-  {
-    game: 'Carrera emprenedora',
-    desc: 'T\'ofereixen ser soci en una start‑up. Hi ha un 20 % de probabilitat de multiplicar per 10 la inversió i un 60 % de perdre-la. Et demanen 15 000 € d\'aportació inicial.',
-    options: ['Rebutjar i estalviar', 'Invertir 5 000 €', 'Invertir 15 000 €', 'Deixar la teua feina i invertir a temps complet']
-  },
-  {
-    game: 'Hipoteca variable',
-    desc: 'Pots triar hipoteca fixa al 3 % o variable Euríbor +0,3. El banc et mostra escenaris: podria pujar al 5 % o baixar al 1 %.',
-    options: ['Fixa 3 %', 'Variable amb sostre', 'Variable pura', 'Endarrerir la compra i esperar 2 anys']
-  },
-  {
-    game: 'Presa de decisions vacacionals amb assegurança de cancel·lació',
-    desc: 'Vacances de 2 000 € no reemborsables o pagar 2 200 € amb assegurança de cancel·lació total. 10 % de probabilitat que no pugues viatjar.',
-    options: ['Pagar assegurança', 'Reservar econòmic amb assegurança parcial', 'Reservar sense assegurança', 'Esperar última hora (pot ser més car)']
-  },
-  {
-    game: 'Criptomoneda emergent',
-    desc: 'Nou token amb volatilitat extrema: pot pujar 300 % o caure 90 % en un any. Inverteixes amb la idea de trading especulatiu.',
-    desc2: '',
-    options: ['No invertir', 'Invertir 500 €', 'Invertir 1 500 €', 'Invertir 5 000 € amb apalancament']
-  },
-  {
-    game: 'Fons de jubilació',
-    desc: 'Pots fer aportació a pla garantitzat 1 % o pla variable amb objectiu 6 %. Tens 25 anys per jubilar‑te.',
-    options: ['Pla garantitzat', 'Pla objectiu 3 %', 'Pla variable 6 %', 'Accions individuals d\'alt risc']
-  }
-];
-
-let idx = 0, score = 0;
-function render(){
-  const q = questions[idx];
-  document.getElementById('title').innerText = q.game;
-  document.getElementById('explain').innerText = q.desc;
-  const optDiv = document.getElementById('options'); optDiv.innerHTML='';
-  q.options.forEach((o,i)=>{
-    const b=document.createElement('button');
-    b.innerText=o;
-    b.className='opt bg-white hover:bg-cyan-100 border-cyan-300';
-    b.onclick=()=>select(i);
-    optDiv.appendChild(b);
-  });
-  document.getElementById('counter').innerText = (idx+1)+' / '+questions.length;
-  document.getElementById('progress').style.width = (idx/questions.length*100)+'%';
-}
-function select(i){ score += i; idx++; if(idx < questions.length){ render(); } else finish(); }
-function finish(){ localStorage.setItem('riskScore', score); window.location.href='resultat_risc.html'; }
-render();
-</script>
-</body>
-</html>
