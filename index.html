@@ -11,26 +11,24 @@
       --rose-50:#fffdfd;
       --rose-100:#fff7f9;
       --rose-200:#ffeef4;
-      --rose-300:#ffd8e4;
-      --rose-400:#ffb9cc;
+      --rose-300:#ffd6e2;
+      --rose-400:#ffb3c8;
     }
-    body{background:var(--rose-50);} /* fons molt clar */
+    body{background:var(--rose-50);} /* fons clar */
 
-    .btn-rose{@apply bg-rose-400 text-white rounded-full px-6 py-3 font-semibold shadow-md transition hover:shadow-lg active:scale-95 duration-150;}
-
-    /* Animacions */
+    /* Animacions personalitzades (funcionen sense @apply) */
     @keyframes fade-up{0%{opacity:0;transform:translateY(24px);}100%{opacity:1;transform:translateY(0);}}
-    .animate-fade-up{animation:fade-up .6s ease-out forwards;}
     @keyframes bounce-slow{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+    .animate-fade-up{animation:fade-up .6s ease-out forwards;}
     .animate-bounce-slow{animation:bounce-slow 3s infinite;}
   </style>
 </head>
 <body class="min-h-screen flex flex-col font-sans text-slate-800">
   <!-- Navbar -->
-  <nav class="sticky top-0 bg-white/70 backdrop-blur border-b border-rose-200/50 z-10">
+  <nav class="sticky top-0 bg-white/70 backdrop-blur border-b border-rose-200/60 z-10">
     <div class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
-      <a href="#" class="flex items-center gap-2 text-2xl font-extrabold text-rose-400">
-        <img src="logo.png" alt="Logo PdE" class="h-10 w-auto">
+      <a href="index.html" class="flex items-center gap-2 text-2xl font-extrabold text-rose-400">
+        <img src="logo.png" alt="Logo PdE" class="h-10 w-auto"/>
         <span class="hidden sm:inline">PdE</span>
       </a>
       <button id="toggle" class="sm:hidden outline-none">
@@ -48,56 +46,53 @@
   <!-- Hero -->
   <header class="flex-1 flex items-center justify-center text-center py-16 px-4 bg-gradient-to-b from-rose-100 via-rose-50 to-rose-50">
     <div class="max-w-2xl space-y-6">
-      <img src="piggy.png" alt="Piggy" class="mx-auto h-36 sm:h-44 animate-bounce-slow drop-shadow">
+      <img src="piggy.png" alt="Piggy" class="mx-auto h-40 sm:h-48 animate-bounce-slow drop-shadow"/>
       <h1 class="text-4xl sm:text-5xl font-extrabold">Descobreix la teua identitat econòmica</h1>
-      <p class="text-lg text-slate-600">Tests curts i visualment divertits per entendre com penses, arrisques i col·labores en l’economia diària.</p>
-      <a href="#tests" class="btn-rose inline-block">Comença ara</a>
+      <p class="text-lg text-slate-600">Tests curts i divertits per entendre com penses, arrisques i col·labores en el dia a dia.</p>
+      <a href="#tests" class="inline-block bg-rose-400 text-white rounded-full px-6 py-3 font-semibold shadow-md transition hover:shadow-lg active:scale-95">Comença ara</a>
     </div>
   </header>
 
-  <!-- Secció tests -->
+  <!-- Tests -->
   <section id="tests" class="max-w-6xl mx-auto px-4 py-20 space-y-12">
-    <h2 class="text-3xl font-bold text-center">Tria un test</h2>
+    <h2 class="text-3xl font-bold text-center mb-8">Tria un test</h2>
     <div class="grid gap-8 md:grid-cols-3">
-      <!-- Card component template -->
-      <a href="quiz_risc.html" class="test-card group">
-        <h3 class="card-title">Aversió al risc</h3>
-        <p class="card-desc">Com et mous entre seguretat i adrenalina?</p>
+      <a href="quiz_risc.html" class="group bg-white border-2 border-rose-200 rounded-2xl p-6 shadow-lg transition transform hover:-translate-y-1 hover:shadow-rose-300 active:scale-95 opacity-0">
+        <h3 class="text-xl font-semibold mb-2 group-hover:text-rose-400">Aversió al risc</h3>
+        <p class="text-sm text-slate-600">Com et mous entre seguretat i adrenalina?</p>
       </a>
-      <a href="quiz_coop.html" class="test-card group">
-        <h3 class="card-title">Cooperació vs Individualisme</h3>
-        <p class="card-desc">Dilemes de teoria de jocs per descobrir com actues amb els altres.</p>
+      <a href="quiz_coop.html" class="group bg-white border-2 border-rose-200 rounded-2xl p-6 shadow-lg transition transform hover:-translate-y-1 hover:shadow-rose-300 active:scale-95 opacity-0">
+        <h3 class="text-xl font-semibold mb-2 group-hover:text-rose-400">Cooperació vs Individualisme</h3>
+        <p class="text-sm text-slate-600">Dilemes de teoria de jocs per descobrir com actues amb els altres.</p>
       </a>
-      <a href="quiz_pensament.html" class="test-card group">
-        <h3 class="card-title">Pensament econòmic</h3>
-        <p class="card-desc">Quina escola econòmica encaixa amb tu?</p>
+      <a href="quiz_pensament.html" class="group bg-white border-2 border-rose-200 rounded-2xl p-6 shadow-lg transition transform hover:-translate-y-1 hover:shadow-rose-300 active:scale-95 opacity-0">
+        <h3 class="text-xl font-semibold mb-2 group-hover:text-rose-400">Pensament econòmic</h3>
+        <p class="text-sm text-slate-600">Quina escola econòmica encaixa amb tu?</p>
       </a>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-rose-100 py-6 text-center text-sm text-slate-600 border-t border-rose-200/70">
+  <footer class="bg-rose-100 py-6 text-center text-sm text-slate-600 border-t border-rose-200/60">
     © <span id="year"></span> Pau Monterde · Profe d’Economia
   </footer>
 
-  <!-- Scripts -->
+  <!-- JS -->
   <script>
+    // any dinàmic
     document.getElementById('year').textContent = new Date().getFullYear();
-    const toggle=document.getElementById('toggle'); const menu=document.getElementById('menu');
-    toggle?.addEventListener('click',()=>menu.classList.toggle('hidden'));
-    // Reveal on scroll
-    const observer=new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('animate-fade-up');observer.unobserve(e.target);} });
-    },{threshold:0.1});
-    document.querySelectorAll('.test-card').forEach(el=>observer.observe(el));
-  </script>
 
-  <!-- Tailwind component classes -->
-  <style>
-    .test-card{@apply bg-white border-2 border-rose-200 rounded-2xl p-6 shadow-lg transition transform hover:-translate-y-1 hover:shadow-rose-300 active:scale-95 opacity-0;}
-    .card-title{@apply text-xl font-semibold mb-2 group-hover:text-rose-400;}
-    .card-desc{@apply text-sm text-slate-600;}
-  </style>
+    // menú mòbil
+    const toggle=document.getElementById('toggle');
+    const menu=document.getElementById('menu');
+    toggle?.addEventListener('click',()=>menu.classList.toggle('hidden'));
+
+    // animació reveal
+    const observer=new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('animate-fade-up');observer.unobserve(e.target);}});
+    },{threshold:0.1});
+    document.querySelectorAll('a.group').forEach(el=>observer.observe(el));
+  </script>
 </body>
 </html>
 
