@@ -1,19 +1,91 @@
 <!DOCTYPE html>
-<html lang='ca'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1.0'>
-<title>Resultat pensament</title><script src="https://cdn.tailwindcss.com"></script></head>
-<body class='bg-emerald-50 flex items-center justify-center min-h-screen text-slate-800'>
-<div class='bg-white p-10 rounded-xl shadow-lg max-w-md text-center'>
-  <h1 class='text-3xl font-bold mb-6'>Resultat del test</h1>
-  <p id='summary' class='text-xl font-semibold'></p><p id='desc' class='mt-4'></p>
-  <a href='index.html' class='inline-block mt-6 text-emerald-700 hover:underline'>← Tornar</a>
-</div>
-<script>
-const s=parseInt(localStorage.getItem('pensamentScore')||0);
-const ratio=s/30;
-let cat='',desc='';
-if(ratio>=0.66){cat='Liberal / Austríac';desc='Confies principalment en els mecanismes de mercat.';}
-else if(ratio>=0.33){cat='Sistema mixt / Keynesià';desc='Veus necessari un equilibri entre mercat i estat.';}
-else {cat='Planificat / Marxista';desc='Prefereixes una intervenció estatal decisiva.';}
-document.getElementById('summary').innerText=cat + ' ('+s+' pts)';
-document.getElementById('desc').innerText=desc;
-</script></body></html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resultat — Pensament econòmic</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-emerald-50 flex items-center justify-center min-h-screen text-slate-800">
+  <div class="bg-white p-10 rounded-2xl shadow-xl w-full max-w-lg">
+    <h1 class="text-3xl font-extrabold mb-6 text-emerald-700 text-center">Resultat del test</h1>
+
+    <!-- Resum dinàmic -->
+    <p id="summary" class="text-2xl font-bold text-center mb-2"></p>
+    <p id="desc" class="text-base mb-6 text-center"></p>
+
+    <!-- Teoria de les escoles de pensament -->
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-2">Què són les escoles de pensament econòmic?</h2>
+      <p class="text-sm leading-relaxed">
+        Una <strong>escola de pensament</strong> és un conjunt d’idees, valors i
+        mètodes sobre com funciona l’economia i quin paper hi juguen el mercat i
+        l’Estat. Des del <em>laissez‑faire</em> liberal fins a la planificació
+        central, cadascuna proposa receptes diferents sobre impostos,
+        regulació, béns públics i benestar.
+      </p>
+    </section>
+
+    <!-- Aplicacions reals -->
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-2">On marquen diferència?</h2>
+      <ul class="list-disc list-inside text-sm leading-relaxed space-y-1">
+        <li><strong>Política fiscal</strong>: nivells d’impostos i despesa pública.</li>
+        <li><strong>Mercat laboral</strong>: grau d’intervenció, salari mínim i sindicats.</li>
+        <li><strong>Regulació</strong>: llibertat d’empresa vs controls de preus i monopolis.</li>
+        <li><strong>Monetària</strong>: independència del banc central o emissió sota mandat polític.</li>
+        <li><strong>Comerç internacional</strong>: lliurecanvisme o proteccionisme.</li>
+      </ul>
+    </section>
+
+    <!-- Recomanacions segons perfil -->
+    <section id="recom" class="text-sm leading-relaxed"></section>
+
+    <a href="index.html" class="inline-block mt-8 text-emerald-700 hover:underline">← Tornar a l'inici</a>
+  </div>
+
+  <script>
+    const s = parseInt(localStorage.getItem('pensamentScore')||0);
+    const max = 30; // 10 preguntes × 3 punts
+    const ratio = s / max; // 0 = estatista, 1 = liberal
+    let cat='', desc='';
+    if(ratio >= 0.66){
+      cat = 'Liberal / Austríac';
+      desc = 'Confies en la lliure competència i veus l’Estat com a àrbitre mínim.';
+    } else if(ratio >= 0.33){
+      cat = 'Mixt / Keynesià';
+      desc = 'Creus en un mercat eficient amb intervencions puntuals per corregir fallades.';
+    } else {
+      cat = 'Planificat / Marxista';
+      desc = 'Penses que l’Estat ha de dirigir i redistribuir per garantir equitat.';
+    }
+    document.getElementById('summary').innerText = cat + ' (' + s + ' punts)';
+    document.getElementById('desc').innerText = desc;
+
+    const rec = {
+      'Liberal / Austríac': `
+        <h2 class="text-lg font-semibold mb-2">Com consolidar la teua visió</h2>
+        <ul class="list-disc list-inside space-y-1">
+          <li>Estudia autors com <em>Hayek</em> i <em>Mises</em>.</li>
+          <li>Analitza l’efecte de la regulació sobre la innovació.</li>
+          <li>Fixa’t en països amb economies obertes i competitives.</li>
+        </ul>` ,
+      'Mixt / Keynesià': `
+        <h2 class="text-lg font-semibold mb-2">Aprofundeix en l’equilibri</h2>
+        <ul class="list-disc list-inside space-y-1">
+          <li>Llig <em>Keynes</em>, <em>Krugman</em> i les crítiques contemporànies.</li>
+          <li>Observa com s’usen estímuls fiscals en recessió.</li>
+          <li>Investiga models nòrdics (mercat + protecció social).</li>
+        </ul>` ,
+      'Planificat / Marxista': `
+        <h2 class="text-lg font-semibold mb-2">Enfoca la justícia social</h2>
+        <ul class="list-disc list-inside space-y-1">
+          <li>Llig <em>Marx</em>, <em>Polanyi</em> i teories post‑capitalistes.</li>
+          <li>Analitza exemples històrics de planificació i els seus reptes.</li>
+          <li>Explora formes modernes de propietat col·lectiva i cooperatives.</li>
+        </ul>`
+    };
+    document.getElementById('recom').innerHTML = rec[cat];
+  </script>
+</body>
+</html>
