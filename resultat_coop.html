@@ -5,10 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Resultat — Cooperació vs Individualisme</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{
+      --rose-50:#fffdfd;
+      --rose-100:#fff7f9;
+      --rose-200:#ffeef4;
+      --rose-300:#ffd6e2;
+      --rose-400:#ffb3c8;
+    }
+    body{background:var(--rose-50);}
+  </style>
 </head>
-<body class="bg-amber-50 flex items-center justify-center min-h-screen text-slate-800">
+<body class="bg-rose-50 flex items-center justify-center min-h-screen text-slate-800">
   <div class="bg-white p-10 rounded-2xl shadow-xl w-full max-w-lg">
-    <h1 class="text-3xl font-extrabold mb-6 text-amber-700 text-center">Resultat del test</h1>
+    <h1 class="text-3xl font-extrabold mb-6 text-rose-400 text-center">Resultat del test</h1>
 
     <!-- Resum dinàmic -->
     <p id="summary" class="text-2xl font-bold text-center mb-2"></p>
@@ -17,12 +27,14 @@
     <!-- Explicació general de teoria de jocs -->
     <section class="mb-8">
       <h2 class="text-xl font-semibold mb-2">Què és la teoria de jocs?</h2>
+      <p class="text-sm leading-relaxed mb-4">
+        La <strong>teoria de jocs</strong> és la branca de l'economia, la psicologia i la sociologia que estudia com es prenen decisions en situacions on el resultat d’una persona depèn del que facen altres. Aquests escenaris es modelen com "jocs", amb jugadors, opcions (estratègies) i conseqüències (guanys o pèrdues).
+      </p>
+      <p class="text-sm leading-relaxed mb-4">
+        Els jocs poden ser cooperatius o competitius, i ens ajuden a entendre dilemes com: confiar o no en algú, repartir recursos, actuar de manera justa o egoista. La clau és que moltes vegades el millor resultat col·lectiu s’obté cooperant, però el millor resultat individual pot sorgir de trair.
+      </p>
       <p class="text-sm leading-relaxed">
-        La <strong>teoria de jocs</strong> és la branca de l'economia i les
-        ciències socials que estudia com prenen decisions els individus quan el
-        resultat de cadascú depén del que facen els altres. Cada “joc” és un
-        model simplificat d'una situació de la vida real amb <em>jugadors</em>,
-        <em>estratègies</em> i <em>pagaments</em> (guanys o pèrdues).
+        Entendre com actues davant aquests dilemes et pot ajudar a construir millors relacions, liderar equips, negociar millor i fins i tot entendre els teus hàbits socials. També permet evitar conflictes i buscar estratègies guanyadores a llarg termini.
       </p>
     </section>
 
@@ -30,28 +42,23 @@
     <section class="mb-8">
       <h2 class="text-xl font-semibold mb-2">On trobem aquests dilemes?</h2>
       <ul class="list-disc list-inside text-sm leading-relaxed space-y-1">
-        <li><strong>Negociació salarial</strong>: cooperes amb la empresa o
-          prems al màxim per obtindre més?</li>
-        <li><strong>Compra-venda</strong>: acceptes un preu just o intentes
-          esprémer l'avantatge?</li>
-        <li><strong>Política internacional</strong>: cooperar en acords climàtics
-          o prioritzar la pròpia economia.</li>
-        <li><strong>Béns públics</strong>: pagar impostos / manteniment d'espais
-          compartits o fer <em>free‑riding</em>.</li>
-        <li><strong>Equip de treball</strong>: contribuir idees i esforç o deixar
-          que altres facen la faena.</li>
+        <li><strong>Negociació salarial</strong>: cooperar amb l'empresa o pressionar al màxim per benefici propi?</li>
+        <li><strong>Compra-venda</strong>: pactar un preu just o intentar esprémer avantatges?</li>
+        <li><strong>Relacions internacionals</strong>: acords climàtics compartits o prioritzar el creixement econòmic propi?</li>
+        <li><strong>Béns públics</strong>: pagar impostos, mantenir espais compartits o aprofitar-se del sistema?</li>
+        <li><strong>Treball en equip</strong>: contribuir de forma equitativa o deixar que els altres assumisquen la càrrega?</li>
       </ul>
     </section>
 
     <!-- Perfil detallat -->
     <section id="perfil-deta" class="text-sm leading-relaxed"></section>
 
-    <a href="index.html" class="inline-block mt-8 text-amber-700 hover:underline">← Tornar a l'inici</a>
+    <a href="index.html" class="inline-block mt-8 text-rose-400 hover:underline">← Tornar a l'inici</a>
   </div>
 
   <script>
     const s = parseInt(localStorage.getItem('coopScore') || 0);
-    const max = 30; // 10 preguntes × 3 punts
+    const max = 30;
     const ratio = s / max;
     let cat = '', desc = '';
     if (ratio < 0.33) {
@@ -67,22 +74,28 @@
     document.getElementById('summary').innerText = cat + ' (' + s + ' punts)';
     document.getElementById('desc').innerText = desc;
 
-    // Perfil detallat amb consells
     const perfilText = {
       'Altament cooperatiu': `
-        <h2 class="text-lg font-semibold mb-2">Com aprofitar el teu perfil?</h2>
-        <p>La gent confia en tu: lidera projectes d'equip, medita conflictes i
-        negocia acords. Vigila, però, amb persones massa oportunistes que es puguen aprofitar de la teua bona fe.</p>`,
+        <h2 class="text-lg font-semibold mb-2 text-rose-400">Com aprofitar el teu perfil?</h2>
+        <ul class="list-disc list-inside space-y-1">
+          <li>Ets ideal per liderar projectes col·laboratius i generar entorns de confiança.</li>
+          <li>Les persones confien en tu de forma natural: aprofita-ho per influir positivament.</li>
+          <li>Vigila no quedar exposat davant oportunistes o entorns molt competitius.</li>
+        </ul>`,
       'Cooperació moderada': `
-        <h2 class="text-lg font-semibold mb-2">Consells per a l'equilibri</h2>
-        <p>El teu enfocament flexible et fa eficaç en entorns canviants. Revisa
-        sovint regles i incentius: massa desconfiança pot erosionar relacions,
-        però massa confiança et pot deixar exposat.</p>`,
+        <h2 class="text-lg font-semibold mb-2 text-rose-400">Consells per a l'equilibri</h2>
+        <ul class="list-disc list-inside space-y-1">
+          <li>Analitza les regles del joc abans de decidir si cooperar o competir.</li>
+          <li>Aprens ràpid del context: utilitza-ho per adaptar-te estratègicament.</li>
+          <li>No deixes que la desconfiança et tanque portes útils a llarg termini.</li>
+        </ul>`,
       'Individualista': `
-        <h2 class="text-lg font-semibold mb-2">Com minimitzar riscos socials</h2>
-        <p>La teua aposta pel benefici propi pot donar-te avantatge en
-        negocis competitius. No obstant, la reputació és clau: col·labora en
-        moments clau per construir xarxes i evitar l'aïllament.</p>`
+        <h2 class="text-lg font-semibold mb-2 text-rose-400">Com minimitzar riscos socials</h2>
+        <ul class="list-disc list-inside space-y-1">
+          <li>En entorns altament col·laboratius pots ser percebut com a distant o egoista.</li>
+          <li>Fer gestos de cooperació puntuals pot millorar la teua reputació i oportunitats futures.</li>
+          <li>Recorda que el benefici a llarg termini sovint ve de la confiança mútua.</li>
+        </ul>`
     };
     document.getElementById('perfil-deta').innerHTML = perfilText[cat];
   </script>
