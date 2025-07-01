@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang='ca'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1.0'>
+<title>Resultat pensament</title><script src="https://cdn.tailwindcss.com"></script></head>
+<body class='bg-emerald-50 flex items-center justify-center min-h-screen text-slate-800'>
+<div class='bg-white p-10 rounded-xl shadow-lg max-w-md text-center'>
+  <h1 class='text-3xl font-bold mb-6'>Resultat del test</h1>
+  <p id='summary' class='text-xl font-semibold'></p><p id='desc' class='mt-4'></p>
+  <a href='index.html' class='inline-block mt-6 text-emerald-700 hover:underline'>← Tornar</a>
+</div>
+<script>
+const s=parseInt(localStorage.getItem('pensamentScore')||0);
+const ratio=s/30;
+let cat='',desc='';
+if(ratio>=0.66){cat='Liberal / Austríac';desc='Confies principalment en els mecanismes de mercat.';}
+else if(ratio>=0.33){cat='Sistema mixt / Keynesià';desc='Veus necessari un equilibri entre mercat i estat.';}
+else {cat='Planificat / Marxista';desc='Prefereixes una intervenció estatal decisiva.';}
+document.getElementById('summary').innerText=cat + ' ('+s+' pts)';
+document.getElementById('desc').innerText=desc;
+</script></body></html>

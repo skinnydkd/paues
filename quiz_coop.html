@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang='ca'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1.0'>
+<title>Test cooperació vs individualisme</title><script src="https://cdn.tailwindcss.com"></script>
+<style>.card{transition:all .35s ease;}.card-enter{opacity:0;transform:scale(.9);}
+.card-enter-active{opacity:1;transform:scale(1);}.opt{@apply py-3 px-4 rounded-xl shadow border font-semibold;}</style>
+</head>
+<body class='bg-amber-50 flex items-center justify-center min-h-screen text-slate-800'>
+<div class='w-full max-w-xl'><div id='card' class='card bg-white rounded-2xl shadow-xl p-6 text-center card-enter-active'>
+<h2 id='question' class='text-2xl font-bold mb-6'></h2><div id='options' class='grid gap-4'></div>
+<div class='mt-6 flex items-center space-x-4'><div class='flex-1 bg-slate-200 rounded-full'><div id='progress' class='h-2 bg-amber-500 rounded-full w-0'></div></div><span id='counter' class='text-sm'></span></div>
+</div></div>
+<script>
+const qData=[["Presoner: l'altra part pot trair-te; qu\u00e8 fas?", ["Cooperar", "Traicionar", "Acallar-se", "Confessar primer"]], ["Ronda de caf\u00e8s amb amics:", ["Convidar", "Esperar que convide alg\u00fa", "Mai convidar", "Anar-te'n abans"]], ["Gallina (xoc frontal):", ["Apartar-te", "Mantindre rumb", "Reduir velocitat", "Accelerar al m\u00e0xim"]], ["Compartir apunts:", ["Compartir gratis", "Intercanviar", "Vendre'ls", "No compartir"]], ["Projecte grupal:", ["Fer tasca extra", "Fer la teua part", "Delegar la teua part", "No fer res"]], ["Wi\u2011Fi comunitari:", ["\u00das just", "\u00das moderat alt", "Abusar streaming 4K", "Bloquejar altres"]], ["Donaci\u00f3 ben\u00e8fica col\u00b7lectiva:", ["Donar generosament", "Donar poc", "No donar", "Criticar l'acci\u00f3"]], ["Repartir past\u00eds:", ["Talls iguals", "Porci\u00f3 lleugerament major", "Porci\u00f3 gran", "Agafar la meitat"]], ["Dades d'estudi \u00fatils:", ["Publicar obertes", "Compartir amb cr\u00e8dit", "Vendre-les", "Amagar-les"]], ["Acord poc profit\u00f3s per a tu:", ["Mantindre'l", "Renegociar", "Ixir", "Sabotejar"]]];
+let idx=0, score=0;
+function render(){
+  const q=qData[idx];document.getElementById('question').innerText=q[0];
+  const optDiv=document.getElementById('options');optDiv.innerHTML='';
+  q[1].forEach((o,i)=>{const b=document.createElement('button');b.innerText=o;
+    b.className='opt bg-white hover:bg-amber-100 border-amber-300';b.onclick=()=>select(i);optDiv.appendChild(b);});
+  document.getElementById('counter').innerText=(idx+1)+' / '+qData.length;
+  document.getElementById('progress').style.width=(idx/qData.length*100)+'%';
+}
+function select(i){score+=i;idx++;if(idx<qData.length)render();else finish();}
+function finish(){localStorage.setItem('coopScore',score);window.location.href='resultat_coop.html';}
+render();
+</script></body>
+</html>

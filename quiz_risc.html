@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang='ca'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1.0'>
+<title>Test d’aversió al risc</title><script src="https://cdn.tailwindcss.com"></script>
+<style>.card{transition:all .35s ease;}.card-enter{opacity:0;transform:scale(.9);}
+.card-enter-active{opacity:1;transform:scale(1);}.opt{@apply py-3 px-4 rounded-xl shadow border font-semibold;}</style>
+</head>
+<body class='bg-cyan-50 flex items-center justify-center min-h-screen text-slate-800'>
+<div class='w-full max-w-xl'><div id='card' class='card bg-white rounded-2xl shadow-xl p-6 text-center card-enter-active'>
+<h2 id='question' class='text-2xl font-bold mb-6'></h2><div id='options' class='grid gap-4'></div>
+<div class='mt-6 flex items-center space-x-4'><div class='flex-1 bg-slate-200 rounded-full'><div id='progress' class='h-2 bg-cyan-500 rounded-full w-0'></div></div><span id='counter' class='text-sm'></span></div>
+</div></div>
+<script>
+const qData=[["Opci\u00f3 d'inversi\u00f3 r\u00e0pida:", ["Cobrar 100\u202f\u20ac segurs", "50\u202f% de guanyar 220\u202f\u20ac, 50\u202f% res", "25\u202f% de guanyar 450\u202f\u20ac, 75\u202f% res", "10\u202f% de guanyar 1.000\u202f\u20ac, 90\u202f% res"]], ["Loteria de barri (bo de 5\u202f\u20ac):", ["Quedar-te els 5\u202f\u20ac", "1/10.000 de guanyar 50.000\u202f\u20ac", "1/50.000 de guanyar 300.000\u202f\u20ac", "1/100.000 de guanyar 1.000.000\u202f\u20ac"]], ["Asseguran\u00e7a m\u00e8dica anual:", ["Pagar 300\u202f\u20ac de quota", "Assumir un 2\u202f% de pagar 10.000\u202f\u20ac", "Assumir un 1\u202f% de pagar 20.000\u202f\u20ac", "Assumir un 0,5\u202f% de pagar 40.000\u202f\u20ac"]], ["Feina amb salari vs comissions:", ["Sou fix 2.000\u202f\u20ac/mes", "Sou base 1.400\u202f\u20ac + comissi\u00f3 potencial 1.000\u202f\u20ac (50\u202f%)", "Sou base 1.000\u202f\u20ac + comissi\u00f3 2.500\u202f\u20ac (30\u202f%)", "Nom\u00e9s comissi\u00f3: mitjana 4.000\u202f\u20ac per\u00f2 pot ser 0"]], ["Estalvi per a jubilaci\u00f3:", ["Rebre 30.000\u202f\u20ac ara", "Probabilitat 60\u202f% de rebre 60.000\u202f\u20ac en 10 anys", "Probabilitat 40\u202f% de rebre 100.000\u202f\u20ac en 15 anys", "Probabilitat 20\u202f% de rebre 250.000\u202f\u20ac en 20 anys"]], ["Tria d'habitatge:", ["Hipoteca fixa 3\u202f% interessos", "Hipoteca variable Eur\u00edbor +0,5\u202f%", "Llogar i invertir difer\u00e8ncia en fons vol\u00e0tils", "No assegurar habitatge i esperar baixada dr\u00e0stica de preus"]], ["Carregar diners en criptomoneda nova:", ["No invertir", "Invertir 500\u202f\u20ac en cripto amb -20\u202f%/+50\u202f%", "Invertir 1.000\u202f\u20ac (-40\u202f%/+120\u202f%)", "Invertir 3.000\u202f\u20ac (-100\u202f%/+400\u202f%)"]], ["Vacances vs estalvi:", ["Vacances senzilles 500\u202f\u20ac", "Vacances 1.000\u202f\u20ac (esperant descompte 30\u202f%)", "Vacances 2.000\u202f\u20ac (esperant 50\u202f% de reembors)", "Reserva \u00faltima hora lluny 3.000\u202f\u20ac sense reembors"]], ["Compra de cotxe:", ["Cotxe nou fiable cost 18.000\u202f\u20ac", "Cotxe semi-nou 12.000\u202f\u20ac amb 20\u202f% risc de reparaci\u00f3 2.000\u202f\u20ac", "Cotxe d'ocasi\u00f3 6.000\u202f\u20ac amb 35\u202f% risc reparaci\u00f3 4.000\u202f\u20ac", "Cotxe subhasta 1.000\u202f\u20ac desconegut estat"]], ["Start-up opla\u00e7ar salari:", ["Treball segur 2.200\u202f\u20ac/mes", "Startup amb 70\u202f% d'\u00e8xit salarial 3.500\u202f\u20ac", "Startup 40\u202f% \u00e8xit salarial 6.000\u202f\u20ac", "Fundar la teua pr\u00f2pia: 10\u202f% d'esdevenir milionari, 90\u202f% sense sou"]]];
+let idx=0, score=0;
+function render(){
+  const q=qData[idx];document.getElementById('question').innerText=q[0];
+  const optDiv=document.getElementById('options');optDiv.innerHTML='';
+  q[1].forEach((o,i)=>{const b=document.createElement('button');b.innerText=o;
+    b.className='opt bg-white hover:bg-cyan-100 border-cyan-300';b.onclick=()=>select(i);optDiv.appendChild(b);});
+  document.getElementById('counter').innerText=(idx+1)+' / '+qData.length;
+  document.getElementById('progress').style.width=(idx/qData.length*100)+'%';
+}
+function select(i){score+=i;idx++; if(idx<qData.length)render(); else finish();}
+function finish(){localStorage.setItem('riskScore',score); window.location.href='resultat_risc.html';}
+render();
+</script></body></html>

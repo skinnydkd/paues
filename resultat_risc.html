@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang='ca'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1.0'>
+<title>Resultat risc</title><script src="https://cdn.tailwindcss.com"></script></head>
+<body class='bg-cyan-50 flex items-center justify-center min-h-screen text-slate-800'>
+<div class='bg-white p-10 rounded-xl shadow-lg max-w-md text-center'>
+<h1 class='text-3xl font-bold mb-6'>Resultat del test</h1>
+<p id='summary' class='text-xl font-semibold'></p><p id='desc' class='mt-4'></p>
+<a href='index.html' class='inline-block mt-6 text-cyan-700 hover:underline'>← Tornar</a>
+</div>
+<script>
+const s=parseInt(localStorage.getItem('riskScore')||0);
+const ratio=s/30;
+let cat='',desc='';
+if(ratio>=0.66){cat='Alt risc';desc='T'agrada assumir riscos significatius per potencials guanys elevats.';}
+else if(ratio>=0.33){cat='Risc moderat';desc='Balances rendibilitat i seguretat.';}
+else {cat='Baix risc';desc='Prefereixes opcions segures i estables.';}
+document.getElementById('summary').innerText=cat+' ('+s+' pts)';
+document.getElementById('desc').innerText=desc;
+</script></body></html>

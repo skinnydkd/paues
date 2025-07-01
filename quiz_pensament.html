@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang='ca'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1.0'>
+<title>Test pensament econòmic</title><script src="https://cdn.tailwindcss.com"></script>
+<style>.card{transition:all .4s ease;}.card-enter{opacity:0;transform:scale(.9);}
+.card-enter-active{opacity:1;transform:scale(1);}</style></head>
+<body class='bg-emerald-50 flex items-center justify-center min-h-screen text-slate-800'>
+<div class='w-full max-w-xl'>
+  <div id='card' class='card bg-white rounded-2xl shadow-xl p-6 text-center card-enter-active'>
+    <h2 id='question' class='text-2xl font-bold mb-6'></h2>
+    <div id='options' class='grid gap-4'></div>
+    <div class='mt-6 flex items-center space-x-4'>
+      <div class='flex-1 bg-slate-200 rounded-full'><div id='progress' class='h-2 bg-emerald-500 rounded-full w-0'></div></div>
+      <span id='counter' class='text-sm'></span>
+    </div>
+  </div>
+</div>
+<script>
+const qData = [["Els impostos baixos incentiven la inversi\u00f3:", ["Molt d'acord", "D'acord", "En desacord", "Molt en desacord"]], ["La propietat col\u00b7lectiva garanteix equitat:", ["Molt d'acord", "D'acord", "En desacord", "Molt en desacord"]], ["L'Estat ha de planificar l'economia:", ["Molt d'acord", "D'acord", "En desacord", "Molt en desacord"]], ["El lliure comer\u00e7 beneficia el creixement:", ["Molt d'acord", "D'acord", "En desacord", "Molt en desacord"]], ["Els programes socials han de ser universals:", ["Molt d'acord", "D'acord", "En desacord", "Molt en desacord"]], ["Els bancs centrals han de ser independents:", ["Molt d'acord", "D'acord", "En desacord", "Molt en desacord"]], ["El proteccionisme protegeix la ind\u00fastria nacional:", ["Molt d'acord", "D'acord", "En desacord", "Molt en desacord"]], ["La compet\u00e8ncia impulsa la qualitat:", ["Molt d'acord", "D'acord", "En desacord", "Molt en desacord"]], ["Els sindicats han de tindre poder ampli:", ["Molt d'acord", "D'acord", "En desacord", "Molt en desacord"]], ["Els preus s'han de regular m\u00ednimament:", ["Molt d'acord", "D'acord", "En desacord", "Molt en desacord"]]];
+let idx=0, score=0;
+function render(){
+  const q=qData[idx];document.getElementById('question').innerText=q[0];
+  const optDiv=document.getElementById('options');optDiv.innerHTML='';
+  q[1].forEach((o,i)=>{const b=document.createElement('button');b.innerText=o;
+    b.className='py-3 px-4 rounded-xl shadow bg-white hover:bg-emerald-100 border border-emerald-300';
+    b.onclick=()=>select(i);optDiv.appendChild(b);});
+  document.getElementById('counter').innerText=(idx+1)+' / '+qData.length;
+  document.getElementById('progress').style.width=(idx/qData.length*100)+'%';
+}
+function select(i){score+=(3-i);idx++; if(idx<qData.length) render(); else finish();}
+function finish(){localStorage.setItem('pensamentScore',score);window.location.href='resultat_pensament.html';}
+render();
+</script></body></html>
