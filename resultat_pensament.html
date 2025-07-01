@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="ca">
+<html lang='ca'>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset='UTF-8' />
+  <meta name='viewport' content='width=device-width, initial-scale=1.0' />
   <title>Resultat — Pensament econòmic</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -14,62 +14,40 @@
     <p id="summary" class="text-2xl font-bold text-center mb-2"></p>
     <p id="desc" class="text-base mb-6 text-center"></p>
 
-    <!-- Teoria de les escoles de pensament -->
+    <!-- Teoria de les escoles -->
     <section class="mb-8">
       <h2 class="text-xl font-semibold mb-2">Què són les escoles de pensament econòmic?</h2>
       <p class="text-sm leading-relaxed">
-        Una <strong>escola de pensament</strong> és un conjunt coherent de principis i mètodes sobre com funciona l’economia i quin paper hi juguen les institucions, els mercats i l’Estat. Des del <em>laissez-faire</em> fins a la planificació central, cada escola proposa receptes diferents per abordar impostos, regulació, béns públics i desenvolupament.
+        Una <strong>escola</strong> agrupa economistes que comparteixen mètodes i valors sobre com funciona l’economia.
+        Comprendre-les ajuda a desxifrar per què proposen receptes tan diferents per als mateixos problemes col·lectius.
       </p>
     </section>
 
     <!-- Taula comparativa -->
     <section class="mb-8">
-      <h2 class="text-xl font-semibold mb-4">Visió panoràmica de les principals escoles</h2>
+      <h2 class="text-xl font-semibold mb-4">Mapa ràpid de les principals escoles</h2>
       <div class="overflow-x-auto">
         <table class="min-w-full text-sm text-left border border-slate-300">
           <thead class="bg-emerald-100 text-slate-700">
             <tr>
               <th class="px-4 py-2 border">Escola</th>
               <th class="px-4 py-2 border">Representants</th>
-              <th class="px-4 py-2 border">Idees fonamentals</th>
+              <th class="px-4 py-2 border">Idees clau</th>
             </tr>
           </thead>
           <tbody>
-           <tr class="border-t">
-  <td class="px-4 py-2 border font-semibold">Clàssica</td>
-  <td class="px-4 py-2 border">Adam Smith, David Ricardo</td>
-  <td class="px-4 py-2 border">Mà invisible, avantatge comparatiu, acumulació de capital com a motor del creixement.</td>
-</tr>
-<tr class="border-t">
-  <td class="px-4 py-2 border font-semibold">Neoclàssica</td>
-  <td class="px-4 py-2 border">Alfred Marshall, Léon Walras, W.S. Jevons</td>
-  <td class="px-4 py-2 border">Oferta i demanda, utilitat marginal, equilibri general i eficiència de mercat.</td>
-</tr>
-<tr class="border-t">
-  <td class="px-4 py-2 border font-semibold">Monetarista</td>
-  <td class="px-4 py-2 border">Milton Friedman, Anna Schwartz</td>
-  <td class="px-4 py-2 border">Control estable de la massa monetària, política antiinflacionista i mercats oberts.</td>
-</tr>
-<tr class="border-t">
-  <td class="px-4 py-2 border font-semibold">Comportamental</td>
-  <td class="px-4 py-2 border">Daniel Kahneman, Richard Thaler</td>
-  <td class="px-4 py-2 border">Biaixos cognitius, decisions irracionals, “nudges” per millorar resultats socials.</td>
-</tr>
+            <tr class="border-t"><td class="px-4 py-2 border font-semibold">Clàssica</td><td class="px-4 py-2 border">A. Smith, D. Ricardo</td><td class="px-4 py-2 border">Avantatge comparatiu, mercat autoregulat, mà invisible.</td></tr>
+            <tr class="border-t"><td class="px-4 py-2 border font-semibold">Neoclàssica</td><td class="px-4 py-2 border">A. Marshall, L. Walras</td><td class="px-4 py-2 border">Oferta/demanda, utilitat marginal, equilibri general.</td></tr>
+            <tr class="border-t"><td class="px-4 py-2 border font-semibold">Monetarista</td><td class="px-4 py-2 border">M. Friedman, A. Schwartz</td><td class="px-4 py-2 border">Control estable de la massa monetària, antiinflació.</td></tr>
+            <tr class="border-t"><td class="px-4 py-2 border font-semibold">Liberal / Austríaca</td><td class="px-4 py-2 border">Hayek, Mises</td><td class="px-4 py-2 border">Mercat lliure, estat mínim, preus com a senyals.</td></tr>
+            <tr class="border-t"><td class="px-4 py-2 border font-semibold">Keynesiana / Mixta</td><td class="px-4 py-2 border">Keynes, Krugman</td><td class="px-4 py-2 border">Despesa pública anticíclica, estabilitzadors automàtics.</td></tr>
+            <tr class="border-t"><td class="px-4 py-2 border font-semibold">Planificada / Marxista</td><td class="px-4 py-2 border">Marx, Luxemburg</td><td class="px-4 py-2 border">Propietat col·lectiva, planificació democràtica.</td></tr>
+            <tr class="border-t"><td class="px-4 py-2 border font-semibold">Ecologista / Decreixentista</td><td class="px-4 py-2 border">D. Daly, K. Raworth</td><td class="px-4 py-2 border">Límits biofísics, economia circular, beyond‑GDP.</td></tr>
+            <tr class="border-t"><td class="px-4 py-2 border font-semibold">Institucionalista</td><td class="px-4 py-2 border">Veblen, North</td><td class="px-4 py-2 border">Pes de normes i institucions, innovació guiada.</td></tr>
+            <tr class="border-t"><td class="px-4 py-2 border font-semibold">Comportamental</td><td class="px-4 py-2 border">Kahneman, Thaler</td><td class="px-4 py-2 border">Biaixos cognitius, decisions irracionals, nudges.</td></tr>
           </tbody>
         </table>
       </div>
-    </section>
-
-    <!-- Aplicacions reals -->
-    <section class="mb-8">
-      <h2 class="text-xl font-semibold mb-2">On marquen diferència?</h2>
-      <ul class="list-disc list-inside text-sm leading-relaxed space-y-1">
-        <li><strong>Política fiscal</strong>: impostos i despesa social.</li>
-        <li><strong>Mercat laboral</strong>: salari mínim, sindicats.</li>
-        <li><strong>Regulació</strong>: controls de preus, antimonopoli.</li>
-        <li><strong>Política monetària</strong>: independència del banc central, inflació.</li>
-        <li><strong>Comerç internacional</strong>: lliurecanvisme vs proteccionisme.</li>
-      </ul>
     </section>
 
     <!-- Recomanacions segons perfil -->
@@ -78,30 +56,62 @@
     <a href="index.html" class="inline-block mt-8 text-emerald-700 hover:underline">← Tornar a l'inici</a>
   </div>
 
-  <script>
-    const s = parseInt(localStorage.getItem('pensamentScore')||0);
-    const max = 30;
-    const ratio = s / max;
-    let cat='', desc='';
-    if(ratio >= 0.66){
-      cat='Liberal / Austríac';
-      desc='Confies en mercats i iniciativa privada.';
-    } else if(ratio >= 0.33){
-      cat='Mixt / Keynesià';
-      desc='Busques equilibri estat‑mercat.';
-    } else {
-      cat='Planificat / Marxista';
-      desc='Prioritzes intervenció i equitat col·lectiva.';
-    }
-    document.getElementById('summary').innerText = cat + ' (' + s + ' pts)';
-    document.getElementById('desc').innerText = desc;
+<script>
+  const s = parseInt(localStorage.getItem('pensamentScore')||0);
+  const max = 60; // 15 preguntes × 4 punts
+  const ratio = s / max;
+  let cat='', desc='';
+  if(ratio >= 0.66){
+    cat='Liberal / Austríac';
+    desc='Confies en la força del mercat i en la llibertat individual.';
+  } else if(ratio >= 0.33){
+    cat='Mixt / Keynesià';
+    desc='Creus que cal combinar mercat i estat per estabilitzar l’economia.';
+  } else {
+    cat='Planificat / Marxista';
+    desc='Veus l’estat i la col·lectivització com a vies per a una societat més equitativa.';
+  }
+  document.getElementById('summary').innerText = cat + ' ('+ s +' punts)';
+  document.getElementById('desc').innerText = desc;
 
-    const rec = {
-      'Liberal / Austríac': `<h2 class='text-lg font-semibold mb-2'>On aprofundir</h2><ul class='list-disc list-inside space-y-1'><li>Lectura de Hayek i Friedman.</li><li>Casos de desregulació exitosa.</li></ul>`,
-      'Mixt / Keynesià': `<h2 class='text-lg font-semibold mb-2'>On aprofundir</h2><ul class='list-disc list-inside space-y-1'><li>Obres de Keynes i Mazzucato.</li><li>Polítiques anticrisi dels països nòrdics.</li></ul>`,
-      'Planificat / Marxista': `<h2 class='text-lg font-semibold mb-2'>On aprofundir</h2><ul class='list-disc list-inside space-y-1'><li>Lectura de Marx, Polanyi.</li><li>Models de cooperatives i planificació democràtica.</li></ul>`
-    };
-    document.getElementById('recom').innerHTML = rec[cat];
-  </script>
+  const rec = {
+    'Liberal / Austríac': `
+      <h2 class='text-lg font-semibold mb-2'>Per aprofundir (similars)</h2>
+      <ul class='list-disc list-inside space-y-1'>
+        <li>Adam Smith – <em>La riquesa de les nacions</em></li>
+        <li>Milton Friedman – <em>Capitalism and Freedom</em></li>
+      </ul>
+      <h2 class='text-lg font-semibold mt-4 mb-2'>Autors contraris</h2>
+      <ul class='list-disc list-inside space-y-1'>
+        <li>John Maynard Keynes</li>
+        <li>Karl Marx</li>
+      </ul>` ,
+    'Mixt / Keynesià': `
+      <h2 class='text-lg font-semibold mb-2'>Per aprofundir (similars)</h2>
+      <ul class='list-disc list-inside space-y-1'>
+        <li>Mariana Mazzucato – <em>El valor de les coses</em></li>
+        <li>Paul Krugman – <em>The Return of Depression Economics</em></li>
+      </ul>
+      <h2 class='text-lg font-semibold mt-4 mb-2'>Autors contraris</h2>
+      <ul class='list-disc list-inside space-y-1'>
+        <li>Friedrich Hayek</li>
+        <li>Milton Friedman</li>
+        <li>Karl Marx</li>
+      </ul>` ,
+    'Planificat / Marxista': `
+      <h2 class='text-lg font-semibold mb-2'>Per aprofundir (similars)</h2>
+      <ul class='list-disc list-inside space-y-1'>
+        <li>Karl Polanyi – <em>La gran transformació</em></li>
+        <li>Rosa Luxemburg – <em>La acumulación de capital</em></li>
+      </ul>
+      <h2 class='text-lg font-semibold mt-4 mb-2'>Autors contraris</h2>
+      <ul class='list-disc list-inside space-y-1'>
+        <li>Friedrich Hayek</li>
+        <li>Milton Friedman</li>
+        <li>John Maynard Keynes</li>
+      </ul>`
+  };
+  document.getElementById('recom').innerHTML = rec[cat];
+</script>
 </body>
 </html>
