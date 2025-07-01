@@ -1,19 +1,90 @@
 <!DOCTYPE html>
-<html lang='ca'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1.0'>
-<title>Resultat cooperació</title><script src="https://cdn.tailwindcss.com"></script></head>
-<body class='bg-amber-50 flex items-center justify-center min-h-screen text-slate-800'>
-<div class='bg-white p-10 rounded-xl shadow-lg max-w-md text-center'>
-<h1 class='text-3xl font-bold mb-6'>Resultat del test</h1>
-<p id='summary' class='text-xl font-semibold'></p><p id='desc' class='mt-4'></p>
-<a href='index.html' class='inline-block mt-6 text-amber-700 hover:underline'>← Tornar</a>
-</div>
-<script>
-const s=parseInt(localStorage.getItem('coopScore')||0);
-const ratio=s/30;
-let cat='',desc='';
-if(ratio<0.33){cat='Altament cooperatiu';desc='Prioritzes el benestar col·lectiu.';}
-else if(ratio<0.66){cat='Cooperació moderada';desc='Equilibres cooperació i interès propi.';}
-else {cat='Individualista';desc='Tendeixes a prioritzar el teu benefici personal.';}
-document.getElementById('summary').innerText=cat+' ('+s+' pts)';
-document.getElementById('desc').innerText=desc;
-</script></body></html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resultat — Cooperació vs Individualisme</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-amber-50 flex items-center justify-center min-h-screen text-slate-800">
+  <div class="bg-white p-10 rounded-2xl shadow-xl w-full max-w-lg">
+    <h1 class="text-3xl font-extrabold mb-6 text-amber-700 text-center">Resultat del test</h1>
+
+    <!-- Resum dinàmic -->
+    <p id="summary" class="text-2xl font-bold text-center mb-2"></p>
+    <p id="desc" class="text-base mb-6 text-center"></p>
+
+    <!-- Explicació general de teoria de jocs -->
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-2">Què és la teoria de jocs?</h2>
+      <p class="text-sm leading-relaxed">
+        La <strong>teoria de jocs</strong> és la branca de l'economia i les
+        ciències socials que estudia com prenen decisions els individus quan el
+        resultat de cadascú depén del que facen els altres. Cada “joc” és un
+        model simplificat d'una situació de la vida real amb <em>jugadors</em>,
+        <em>estratègies</em> i <em>pagaments</em> (guanys o pèrdues).
+      </p>
+    </section>
+
+    <!-- Situacions on s'aplica -->
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-2">On trobem aquests dilemes?</h2>
+      <ul class="list-disc list-inside text-sm leading-relaxed space-y-1">
+        <li><strong>Negociació salarial</strong>: cooperes amb la empresa o
+          prems al màxim per obtindre més?</li>
+        <li><strong>Compra-venda</strong>: acceptes un preu just o intentes
+          esprémer l'avantatge?</li>
+        <li><strong>Política internacional</strong>: cooperar en acords climàtics
+          o prioritzar la pròpia economia.</li>
+        <li><strong>Béns públics</strong>: pagar impostos / manteniment d'espais
+          compartits o fer <em>free‑riding</em>.</li>
+        <li><strong>Equip de treball</strong>: contribuir idees i esforç o deixar
+          que altres facen la faena.</li>
+      </ul>
+    </section>
+
+    <!-- Perfil detallat -->
+    <section id="perfil-deta" class="text-sm leading-relaxed"></section>
+
+    <a href="index.html" class="inline-block mt-8 text-amber-700 hover:underline">← Tornar a l'inici</a>
+  </div>
+
+  <script>
+    const s = parseInt(localStorage.getItem('coopScore') || 0);
+    const max = 30; // 10 preguntes × 3 punts
+    const ratio = s / max;
+    let cat = '', desc = '';
+    if (ratio < 0.33) {
+      cat = 'Altament cooperatiu';
+      desc = 'Tens una forta inclinació a crear confiança i compartir recursos, fins i tot si això implica sacrificar beneficis immediats.';
+    } else if (ratio < 0.66) {
+      cat = 'Cooperació moderada';
+      desc = 'Adaptes la teua estratègia: col·labores mentre hi hagen incentius clars, però protegeixes el teu interès quan perceps desequilibri.';
+    } else {
+      cat = 'Individualista';
+      desc = 'Prioritzes els teus interessos i estàs disposat a arriscar la cooperació si veus una oportunitat de guany personal més gran.';
+    }
+    document.getElementById('summary').innerText = cat + ' (' + s + ' punts)';
+    document.getElementById('desc').innerText = desc;
+
+    // Perfil detallat amb consells
+    const perfilText = {
+      'Altament cooperatiu': `
+        <h2 class="text-lg font-semibold mb-2">Com aprofitar el teu perfil?</h2>
+        <p>La gent confia en tu: lidera projectes d'equip, medita conflictes i
+        negocia acords. Vigila, però, amb persones massa oportunistes que es puguen aprofitar de la teua bona fe.</p>`,
+      'Cooperació moderada': `
+        <h2 class="text-lg font-semibold mb-2">Consells per a l'equilibri</h2>
+        <p>El teu enfocament flexible et fa eficaç en entorns canviants. Revisa
+        sovint regles i incentius: massa desconfiança pot erosionar relacions,
+        però massa confiança et pot deixar exposat.</p>`,
+      'Individualista': `
+        <h2 class="text-lg font-semibold mb-2">Com minimitzar riscos socials</h2>
+        <p>La teua aposta pel benefici propi pot donar-te avantatge en
+        negocis competitius. No obstant, la reputació és clau: col·labora en
+        moments clau per construir xarxes i evitar l'aïllament.</p>`
+    };
+    document.getElementById('perfil-deta').innerHTML = perfilText[cat];
+  </script>
+</body>
+</html>
