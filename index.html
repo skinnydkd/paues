@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>PdE · Profe d’Economia</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
@@ -12,8 +12,11 @@
     body { background:var(--rose-50); }
     @keyframes fade-up{0%{opacity:0;transform:translateY(24px);}100%{opacity:1;transform:translateY(0);}}
     @keyframes bounce-slow{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+    @keyframes zoom-in{0%{transform:scale(0.8);opacity:0;}100%{transform:scale(1);opacity:1;}}
     .animate-fade-up{animation:fade-up .6s ease-out forwards;}
     .animate-bounce-slow{animation:bounce-slow 3s infinite;}
+    .animate-zoom-in{animation:zoom-in .6s ease-out forwards;}
+    .group:hover { background-color: var(--rose-100); }
   </style>
 </head>
 <body class="min-h-screen flex flex-col font-sans text-slate-800">
@@ -21,8 +24,7 @@
   <nav class="sticky top-0 bg-white/70 backdrop-blur border-b border-rose-200/60 z-10">
     <div class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
       <a href="index.html" class="flex items-center gap-2 text-rose-400">
-        <img src="logo.png" alt="Logo PdE" class="h-20 w-auto drop-shadow" />
-        <span class="hidden sm:inline text-3xl font-extrabold">PdE</span>
+<img src="logo.png" alt="Logo PdE" class="h-24 w-auto drop-shadow" />
       </a>
       <button id="toggle" class="sm:hidden outline-none">
         <svg class="w-8 h-8 text-rose-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -39,12 +41,13 @@
   <!-- Hero -->
   <header class="flex-1 flex items-center justify-center text-center py-16 px-4 bg-gradient-to-b from-rose-100 via-rose-50 to-rose-50">
     <div class="max-w-2xl space-y-6">
-      <div class="mx-auto w-28 h-28 sm:w-36 sm:h-36 rounded-full overflow-hidden animate-bounce-slow shadow-lg ring-4 ring-rose-200">
+      <div class="mx-auto w-28 h-28 sm:w-36 sm:h-36 rounded-full overflow-hidden animate-zoom-in shadow-lg ring-4 ring-rose-200">
         <img src="piggy.png" alt="Guardiola" class="w-full h-full object-contain"/>
       </div>
-      <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight">Descobreix la teua identitat econòmica</h1>
-      <p class="text-lg text-slate-600">Tests curts i divertits per entendre com penses, arrisques i col·labores en el dia a dia.</p>
-      <a href="#tests" class="inline-block bg-rose-400 text-white rounded-full px-8 py-3 text-lg font-semibold shadow-md transition hover:shadow-lg active:scale-95">Comença ara</a>
+      <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight animate-fade-up">Descobreix la teua identitat econòmica</h1>
+      <p class="text-md sm:text-lg text-slate-500 animate-fade-up">Una iniciativa educativa per conèixer-te millor com a decisor econòmic.</p>
+      <p class="text-lg text-slate-600 animate-fade-up">Tests curts i divertits per entendre com penses, arrisques i col·labores en el dia a dia.</p>
+      <a href="#tests" class="inline-block bg-rose-400 text-white rounded-full px-8 py-3 text-lg font-semibold shadow-md transition hover:shadow-lg active:scale-95 animate-fade-up">Comença ara</a>
     </div>
   </header>
 
