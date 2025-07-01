@@ -6,20 +6,28 @@
   <title>🤝 Test Cooperació vs Individualisme</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    .card{transition:all .35s ease}
-    .card-enter{opacity:0;transform:scale(.9)}
-    .card-enter-active{opacity:1;transform:scale(1)}
-    .opt{@apply py-3 px-4 rounded-xl shadow border font-semibold text-left}
+    :root{
+      --rose-50:#fffdfd;
+      --rose-100:#fff7f9;
+      --rose-200:#ffeef4;
+      --rose-300:#ffd6e2;
+      --rose-400:#ffb3c8;
+    }
+    body{background:var(--rose-50);} /* fons clar */
+    @keyframes fade-up{0%{opacity:0;transform:translateY(24px);}100%{opacity:1;transform:translateY(0);}}
+    .animate-fade-up{animation:fade-up .6s ease-out forwards;}
   </style>
 </head>
-<body class='bg-amber-50 min-h-screen flex items-center justify-center px-4 text-slate-800'>
+<body class='bg-rose-50 min-h-screen flex items-center justify-center px-4 text-slate-800'>
   <div class='max-w-xl mx-auto'>
-    <div id='card' class='card bg-white rounded-2xl shadow-xl p-6 card-enter-active'>
+    <div id='card' class='bg-white rounded-2xl shadow-xl p-6 animate-fade-up'>
       <h2 id='title' class='text-xl font-bold mb-3'></h2>
       <p id='explain' class='text-sm text-slate-600 mb-6'></p>
       <div id='options' class='grid gap-4'></div>
       <div class='mt-6 flex items-center space-x-4'>
-        <div class='flex-1 bg-slate-200 rounded-full'><div id='progress' class='h-2 bg-amber-500 rounded-full w-0'></div></div>
+        <div class='flex-1 bg-slate-200 rounded-full'>
+          <div id='progress' class='h-2 bg-rose-400 rounded-full w-0'></div>
+        </div>
         <span id='counter' class='text-sm'></span>
       </div>
     </div>
@@ -88,7 +96,7 @@ function render(){
   q.options.forEach((o,i)=>{
     const b=document.createElement('button');
     b.innerText=o;
-    b.className='opt bg-white hover:bg-amber-100 border-amber-300';
+    b.className='py-3 px-4 rounded-xl shadow border font-semibold text-left bg-white hover:bg-rose-100 border-rose-300';
     b.onclick=()=>select(i);
     optDiv.appendChild(b);
   });
@@ -101,4 +109,3 @@ render();
 </script>
 </body>
 </html>
-
