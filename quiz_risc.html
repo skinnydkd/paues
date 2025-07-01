@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang='ca'>
 <head>
-<meta charset='UTF-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1.0'>
-<title>🧠 Test d'identitat econòmica</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<style>
-  .card{transition:all .35s ease}
-  .card-enter{opacity:0;transform:scale(.9)}
-  .card-enter-active{opacity:1;transform:scale(1)}
-  .opt{@apply py-3 px-4 rounded-xl shadow border font-semibold text-left}
-</style>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>🎲 Test d’aversió al risc</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .card{transition:all .35s ease;}
+    .card-enter{opacity:0;transform:scale(.9);}
+    .card-enter-active{opacity:1;transform:scale(1);}
+    .opt{@apply py-3 px-4 rounded-xl shadow border font-semibold text-left;}
+  </style>
 </head>
 <body class='bg-cyan-50 min-h-screen flex items-center justify-center px-4 text-slate-800'>
-  <div class='w-full max-w-2xl'>
+  <div class='max-w-xl mx-auto'>
     <div id='card' class='card bg-white rounded-2xl shadow-xl p-6 card-enter-active'>
       <h2 id='title' class='text-xl font-bold mb-3'></h2>
       <p id='explain' class='text-sm text-slate-600 mb-6'></p>
       <div id='options' class='grid gap-4'></div>
       <div class='mt-6 flex items-center space-x-4'>
-        <div class='flex-1 bg-slate-200 rounded-full'><div id='progress' class='h-2 bg-emerald-500 rounded-full w-0'></div></div>
+        <div class='flex-1 bg-slate-200 rounded-full'><div id='progress' class='h-2 bg-cyan-500 rounded-full w-0'></div></div>
         <span id='counter' class='text-sm'></span>
       </div>
     </div>
@@ -28,136 +28,59 @@
 <script>
 const questions = [
   {
-    game:'Crisi i reactivació',
-    desc:'Un país amb alt atur i deute públic ha de reactivar l’economia. Què hauria de prioritzar?',
+    game:'Repte esportiu',
+    desc:'Vols mantenir-te actiu el cap de setmana; cada activitat té nivell d’adrenalina i risc de lesió diferents.',
     options:[
-      'Incentivar el consum i l’ocupació amb despesa pública',
-      'Reduir impostos i deregular el mercat',
-      'Nacionalitzar sectors claus i planificar l’activitat',
-      'Modernitzar l’administració i invertir en innovació',
-      'Reduir la producció i el consum a nivell sistèmic'
+      'Caminar 5 km pel parc',
+      'Ciclisme de carretera suau 20 km',
+      'Escalada indoor en rocòdrom',
+      'Cursa d’obstacles amb fang i salts de 2 m'
     ]
   },
   {
-    game:'Riquesa empresarial',
-    desc:'Una empresa genera beneficis extraordinaris. Com hauria d’actuar?',
-    options:[
-      'Repartir dividends entre els accionistes',
-      'Compartir beneficis amb la plantilla',
-      'Reinvertir per estimular demanda i ocupació',
-      'Convertir part del capital en Bitcoin com a reserva',
-      'Destinar part a compensació ambiental i comunitària'
-    ]
+    game:'Compra de cotxe nou vs ocasió',
+    desc:'Necessites vehicle per treballar. Un cotxe nou té garantia de 5 anys però és més car; el d\'ocasió és barat però pot requerir reparacions cares inesperades.',
+    options:['Cotxe nou amb garantia','Semi-nou certificat','Ocasió amb historial','Subhasta sense historial']
   },
   {
-    game:'Habitatge i especulació',
-    desc:'El preu de l’habitatge s’ha disparat en poques dècades. Què hauria de fer el govern?',
-    options:[
-      'No intervenir: el mercat s’autorregula',
-      'Limitar preus i garantir lloguer social',
-      'Construir habitatge públic i incentivar cooperatives',
-      'Prohibir compra especulativa i taxar segones residències',
-      'Establir crèdits fiscals només per a residents'
-    ]
+    game:'Assegurança mèdica privada',
+    desc:'La teua empresa ofereix assegurança que costa 600 € l\'any. Sense ella, hi ha un 1 % de probabilitat d\'haver de pagar 20.000 € de la teua butxaca.',
+    options:['Contractar assegurança','Crear fons d\'emergència','Assumir risc sense fons','Ignorar i gastar els diners']
   },
   {
-    game:'Sistema monetari',
-    desc:'Els bancs comercials creen diners via crèdit. És un sistema just?',
-    options:[
-      'És beneficiós i fomenta el creixement',
-      'Cal controlar-ho amb banca pública',
-      'Tornar a diners amb suport tangible',
-      'Abolir-ho i crear banca comuna democràtica',
-      'Crear monedes digitals públiques obertes'
-    ]
+    game:'Sou fix vs comissions',
+    desc:'Oferta A: sou fix de 2.200 €/mes. Oferta B: sou base 1.100 € + comissions que poden doblar el salari però són incertes.',
+    options:['Sou fix 2.200 €','Sou 1.700 € mixte','Sou base i comissió alta','Només comissions (pot ser 0)']
   },
   {
-    game:'Innovació i IA',
-    desc:'L’automatització substitueix llocs. Quina resposta és millor?',
-    options:[
-      'Deixar que la iniciativa privada s’adapte',
-      'Redistribuir guanys amb una renda bàsica',
-      'Prohibir substitució sense consens social',
-      'Redefinir producció amb menys treball i consum',
-      'Regular i compartir patents d’IA de manera oberta'
-    ]
+    game:'Loteria solidària',
+    desc:'Pots donar 10 € a una causa i obtindre un bitllet. Premi: 100.000 € amb probabilitat 1/20.000. O pots donar directament els 10 € sabent que ajudaran igualment.',
+    options:['Donar sense bitllet','Comprar 1 bitllet','Comprar per 30 €','Comprar per 100 €']
   },
   {
-    game:'Comerç internacional',
-    desc:'Un país en desenvolupament vol protegir la indústria. És legítim?',
-    options:[
-      'Mantenir lliure comerç sense barreres',
-      'Protegir fins que siga competitiu',
-      'Crear aliances regionals autònomes',
-      'Només permetre-ho si respecta drets socials i ecològics',
-      'Aplicar aranzels verds per fomentar producció local'
-    ]
+    game:'Carrera emprenedora',
+    desc:'Et proposen invertir en una start-up amb un 20 % de multiplicar per 10 la inversió i un 60 % de perdre-la. Aportació demanada: 15.000 €.',
+    options:['Rebutjar i estalviar','Invertir 5.000 €','Invertir 15.000 €','Deixar feina i invertir temps complet']
   },
   {
-    game:'Criptomonedes',
-    desc:'Pot Bitcoin substituir els diners tradicionals?',
-    options:[
-      'No, és massa volàtil i insegur',
-      'Sí, perquè és descentralitzat i lliure',
-      'Només si es regula fiscalment',
-      'Cal crear criptomonedes públiques o comunitàries',
-      'Adoptar stablecoins vinculades a actius reals'
-    ]
+    game:'Hipoteca fixa vs variable',
+    desc:'Hipoteca fixa al 3 % o variable Euríbor +0,3 %. El banc et mostra escenaris: variable podria pujar al 5 % o baixar a l’1 %.',
+    options:['Fixa 3 %','Variable amb sostre','Variable pura','Esperar 2 anys']
   },
   {
-    game:'Desigualtats',
-    desc:'L’1 % més ric acumula gran part de la riquesa mundial. Què s’hauria de fer?',
-    options:[
-      'No fer res: és resultat del mercat',
-      'Imposar impostos extraordinaris a fortunes',
-      'Abolir la propietat privada dels mitjans',
-      'Redistribuir via serveis públics i renda bàsica',
-      'Promoure participació de treballadors en el capital'
-    ]
+    game:'Vacances i assegurança de cancel·lació',
+    desc:'Vacances de 2.000 € no reemborsables o pagar 2.200 € amb assegurança de cancel·lació total. 10 % de probabilitat de no poder viatjar.',
+    options:['Pagar assegurança','Reserva econòmica amb assegurança parcial','Reservar sense assegurança','Esperar última hora']
   },
   {
-    game:'Sostenibilitat',
-    desc:'El planeta està al límit ecològic. Quin model econòmic és més adequat?',
-    options:[
-      'Confiar en la innovació per continuar creixent',
-      'Orientar l’economia a sectors verds',
-      'Reduir consum i producció de forma sistemàtica',
-      'Planificar ecològicament els recursos',
-      'Aplicar taxes globals de carboni'
-    ]
+    game:'Inversió en criptomoneda emergent',
+    desc:'Nou token pot pujar 300 % o caure 90 % en un any. Consideres trading especulatiu.',
+    options:['No invertir','Invertir 500 €','Invertir 1.500 €','Invertir 5.000 € apalancat']
   },
   {
-    game:'Finalitat de l’economia',
-    desc:'Quina hauria de ser la finalitat principal de l’economia?',
-    options:[
-      'Maximitzar creixement i productivitat',
-      'Garantir benestar material i emocional',
-      'Eliminar dominació i desigualtat estructural',
-      'Assegurar sostenibilitat amb el planeta',
-      'Fomentar la creativitat i la cooperació'
-    ]
-  },
-  {
-    game:'Impostos',
-    desc:'Quin sistema fiscal és preferible?',
-    options:[
-      'Impostos mínims i pla tarifari únic',
-      'Sistema progressiu redistributiu',
-      'Eliminar impostos privats i col·lectivitzar',
-      'Fiscalitat verda i d’impacte',
-      'Flat tax moderat amb alguns incentius'
-    ]
-  },
-  {
-    game:'Propietat privada',
-    desc:'Com hauria de ser la propietat dels mitjans de producció?',
-    options:[
-      'Totalment privada i lliure',
-      'Privada però limitada per criteris socials',
-      'Propietat col·lectiva',
-      'Models cooperatius i comunitaris',
-      'Infraestructures clau en mans públiques'
-    ]
+    game:'Fons de jubilació',
+    desc:'Et queden 25 anys per jubilar-te. Pla garantitzat 1 % vs pla variable objectiu 6 %.',
+    options:['Pla garantitzat','Pla objectiu 3 %','Pla variable 6 %','Accions individuals d’alt risc']
   }
 ];
 
@@ -170,15 +93,16 @@ function render(){
   q.options.forEach((o,i)=>{
     const b=document.createElement('button');
     b.innerText=o;
-    b.className='opt bg-white hover:bg-emerald-100 border-emerald-300';
+    b.className='opt bg-white hover:bg-cyan-100 border-cyan-300';
     b.onclick=()=>select(i);
     optDiv.appendChild(b);
   });
   document.getElementById('counter').innerText = (idx+1)+' / '+questions.length;
   document.getElementById('progress').style.width = (idx/questions.length*100)+'%';
 }
-function select(i){ score += (4-i); idx++; if(idx < questions.length){ render(); } else finish(); }
-function finish(){ localStorage.setItem('pensamentScore', score); window.location.href='resultat_pensament.html'; }
+function select(i){ score += i; idx++; if(idx < questions.length){ render(); } else finish(); }
+function finish(){ localStorage.setItem('riskScore', score); window.location.href='resultat_risc.html'; }
 render();
 </script>
-
+</body>
+</html>
