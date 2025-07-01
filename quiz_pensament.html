@@ -1,32 +1,183 @@
 <!DOCTYPE html>
-<html lang='ca'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1.0'>
-<title>Test pensament econòmic</title><script src="https://cdn.tailwindcss.com"></script>
-<style>.card{transition:all .4s ease;}.card-enter{opacity:0;transform:scale(.9);}
-.card-enter-active{opacity:1;transform:scale(1);}</style></head>
+<html lang='ca'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>🧠 Test d'identitat econòmica</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  .card{transition:all .35s ease}
+  .card-enter{opacity:0;transform:scale(.9)}
+  .card-enter-active{opacity:1;transform:scale(1)}
+  .opt{@apply py-3 px-4 rounded-xl shadow border font-semibold text-left}
+</style>
+</head>
 <body class='bg-emerald-50 flex items-center justify-center min-h-screen text-slate-800'>
-<div class='w-full max-w-xl'>
-  <div id='card' class='card bg-white rounded-2xl shadow-xl p-6 text-center card-enter-active'>
-    <h2 id='question' class='text-2xl font-bold mb-6'></h2>
-    <div id='options' class='grid gap-4'></div>
-    <div class='mt-6 flex items-center space-x-4'>
-      <div class='flex-1 bg-slate-200 rounded-full'><div id='progress' class='h-2 bg-emerald-500 rounded-full w-0'></div></div>
-      <span id='counter' class='text-sm'></span>
+  <div class='w-full max-w-2xl'>
+    <div id='card' class='card bg-white rounded-2xl shadow-xl p-6 card-enter-active'>
+      <h2 id='title' class='text-xl font-bold mb-3'></h2>
+      <p id='explain' class='text-sm text-slate-600 mb-6'></p>
+      <div id='options' class='grid gap-4'></div>
+      <div class='mt-6 flex items-center space-x-4'>
+        <div class='flex-1 bg-slate-200 rounded-full'><div id='progress' class='h-2 bg-emerald-500 rounded-full w-0'></div></div>
+        <span id='counter' class='text-sm'></span>
+      </div>
     </div>
   </div>
-</div>
+
 <script>
-const qData = [["Els impostos baixos incentiven la inversi\u00f3:", ["Molt d'acord", "D'acord", "En desacord", "Molt en desacord"]], ["La propietat col\u00b7lectiva garanteix equitat:", ["Molt d'acord", "D'acord", "En desacord", "Molt en desacord"]], ["L'Estat ha de planificar l'economia:", ["Molt d'acord", "D'acord", "En desacord", "Molt en desacord"]], ["El lliure comer\u00e7 beneficia el creixement:", ["Molt d'acord", "D'acord", "En desacord", "Molt en desacord"]], ["Els programes socials han de ser universals:", ["Molt d'acord", "D'acord", "En desacord", "Molt en desacord"]], ["Els bancs centrals han de ser independents:", ["Molt d'acord", "D'acord", "En desacord", "Molt en desacord"]], ["El proteccionisme protegeix la ind\u00fastria nacional:", ["Molt d'acord", "D'acord", "En desacord", "Molt en desacord"]], ["La compet\u00e8ncia impulsa la qualitat:", ["Molt d'acord", "D'acord", "En desacord", "Molt en desacord"]], ["Els sindicats han de tindre poder ampli:", ["Molt d'acord", "D'acord", "En desacord", "Molt en desacord"]], ["Els preus s'han de regular m\u00ednimament:", ["Molt d'acord", "D'acord", "En desacord", "Molt en desacord"]]];
-let idx=0, score=0;
+const questions = [
+  {
+    game:'Crisi i reactivació',
+    desc:'Un país amb alt atur i deute públic ha de reactivar l’economia. Què hauria de prioritzar?',
+    options:[
+      'Incentivar el consum i l’ocupació amb despesa pública',
+      'Reduir impostos i deregular el mercat',
+      'Nacionalitzar sectors claus i planificar l’activitat',
+      'Modernitzar l’administració i invertir en innovació',
+      'Reduir la producció i el consum a nivell sistèmic'
+    ]
+  },
+  {
+    game:'Riquesa empresarial',
+    desc:'Una empresa genera beneficis extraordinaris. Com hauria d’actuar?',
+    options:[
+      'Repartir dividends entre els accionistes',
+      'Compartir beneficis amb la plantilla',
+      'Reinvertir per estimular demanda i ocupació',
+      'Convertir part del capital en Bitcoin com a reserva',
+      'Destinar part a compensació ambiental i comunitària'
+    ]
+  },
+  {
+    game:'Habitatge i especulació',
+    desc:'El preu de l’habitatge s’ha disparat en poques dècades. Què hauria de fer el govern?',
+    options:[
+      'No intervenir: el mercat s’autorregula',
+      'Limitar preus i garantir lloguer social',
+      'Construir habitatge públic i incentivar cooperatives',
+      'Prohibir compra especulativa i taxar segones residències',
+      'Establir crèdits fiscals només per a residents'
+    ]
+  },
+  {
+    game:'Sistema monetari',
+    desc:'Els bancs comercials creen diners via crèdit. És un sistema just?',
+    options:[
+      'És beneficiós i fomenta el creixement',
+      'Cal controlar-ho amb banca pública',
+      'Tornar a diners amb suport tangible',
+      'Abolir-ho i crear banca comuna democràtica',
+      'Crear monedes digitals públiques obertes'
+    ]
+  },
+  {
+    game:'Innovació i IA',
+    desc:'L’automatització substitueix llocs. Quina resposta és millor?',
+    options:[
+      'Deixar que la iniciativa privada s’adapte',
+      'Redistribuir guanys amb una renda bàsica',
+      'Prohibir substitució sense consens social',
+      'Redefinir producció amb menys treball i consum',
+      'Regular i compartir patents d’IA de manera oberta'
+    ]
+  },
+  {
+    game:'Comerç internacional',
+    desc:'Un país en desenvolupament vol protegir la indústria. És legítim?',
+    options:[
+      'Mantenir lliure comerç sense barreres',
+      'Protegir fins que siga competitiu',
+      'Crear aliances regionals autònomes',
+      'Només permetre-ho si respecta drets socials i ecològics',
+      'Aplicar aranzels verds per fomentar producció local'
+    ]
+  },
+  {
+    game:'Criptomonedes',
+    desc:'Pot Bitcoin substituir els diners tradicionals?',
+    options:[
+      'No, és massa volàtil i insegur',
+      'Sí, perquè és descentralitzat i lliure',
+      'Només si es regula fiscalment',
+      'Cal crear criptomonedes públiques o comunitàries',
+      'Adoptar stablecoins vinculades a actius reals'
+    ]
+  },
+  {
+    game:'Desigualtats',
+    desc:'L’1 % més ric acumula gran part de la riquesa mundial. Què s’hauria de fer?',
+    options:[
+      'No fer res: és resultat del mercat',
+      'Imposar impostos extraordinaris a fortunes',
+      'Abolir la propietat privada dels mitjans',
+      'Redistribuir via serveis públics i renda bàsica',
+      'Promoure participació de treballadors en el capital'
+    ]
+  },
+  {
+    game:'Sostenibilitat',
+    desc:'El planeta està al límit ecològic. Quin model econòmic és més adequat?',
+    options:[
+      'Confiar en la innovació per continuar creixent',
+      'Orientar l’economia a sectors verds',
+      'Reduir consum i producció de forma sistemàtica',
+      'Planificar ecològicament els recursos',
+      'Aplicar taxes globals de carboni'
+    ]
+  },
+  {
+    game:'Finalitat de l’economia',
+    desc:'Quina hauria de ser la finalitat principal de l’economia?',
+    options:[
+      'Maximitzar creixement i productivitat',
+      'Garantir benestar material i emocional',
+      'Eliminar dominació i desigualtat estructural',
+      'Assegurar sostenibilitat amb el planeta',
+      'Fomentar la creativitat i la cooperació'
+    ]
+  },
+  {
+    game:'Impostos',
+    desc:'Quin sistema fiscal és preferible?',
+    options:[
+      'Impostos mínims i pla tarifari únic',
+      'Sistema progressiu redistributiu',
+      'Eliminar impostos privats i col·lectivitzar',
+      'Fiscalitat verda i d’impacte',
+      'Flat tax moderat amb alguns incentius'
+    ]
+  },
+  {
+    game:'Propietat privada',
+    desc:'Com hauria de ser la propietat dels mitjans de producció?',
+    options:[
+      'Totalment privada i lliure',
+      'Privada però limitada per criteris socials',
+      'Propietat col·lectiva',
+      'Models cooperatius i comunitaris',
+      'Infraestructures clau en mans públiques'
+    ]
+  }
+];
+
+let idx = 0, score = 0;
 function render(){
-  const q=qData[idx];document.getElementById('question').innerText=q[0];
-  const optDiv=document.getElementById('options');optDiv.innerHTML='';
-  q[1].forEach((o,i)=>{const b=document.createElement('button');b.innerText=o;
-    b.className='py-3 px-4 rounded-xl shadow bg-white hover:bg-emerald-100 border border-emerald-300';
-    b.onclick=()=>select(i);optDiv.appendChild(b);});
-  document.getElementById('counter').innerText=(idx+1)+' / '+qData.length;
-  document.getElementById('progress').style.width=(idx/qData.length*100)+'%';
+  const q = questions[idx];
+  document.getElementById('title').innerText = q.game;
+  document.getElementById('explain').innerText = q.desc;
+  const optDiv = document.getElementById('options'); optDiv.innerHTML='';
+  q.options.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.innerText=o;
+    b.className='opt bg-white hover:bg-emerald-100 border-emerald-300';
+    b.onclick=()=>select(i);
+    optDiv.appendChild(b);
+  });
+  document.getElementById('counter').innerText = (idx+1)+' / '+questions.length;
+  document.getElementById('progress').style.width = (idx/questions.length*100)+'%';
 }
-function select(i){score+=(3-i);idx++; if(idx<qData.length) render(); else finish();}
-function finish(){localStorage.setItem('pensamentScore',score);window.location.href='resultat_pensament.html';}
+function select(i){ score += (4-i); idx++; if(idx < questions.length){ render(); } else finish(); }
+function finish(){ localStorage.setItem('pensamentScore', score); window.location.href='resultat_pensament.html'; }
 render();
-</script></body></html>
+</script>
