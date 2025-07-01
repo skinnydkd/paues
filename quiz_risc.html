@@ -6,103 +6,65 @@
   <title>🎲 Test d’aversió al risc</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    .card{transition:all .35s ease;}
-    .card-enter{opacity:0;transform:scale(.9);}
-    .card-enter-active{opacity:1;transform:scale(1);}
-    .opt{@apply py-3 px-4 rounded-xl shadow border font-semibold text-left;}
+    /* paleta rosa pastís */
+    :root{
+      --rose-50:#fffdfd;
+      --rose-100:#fff7f9;
+      --rose-200:#ffeef4;
+      --rose-300:#ffd6e2;
+      --rose-400:#ffb3c8;
+    }
+    body{background:var(--rose-50);} /* fons clar */
+    @keyframes fade-up{0%{opacity:0;transform:translateY(24px);}100%{opacity:1;transform:translateY(0);}}
+    .animate-fade-up{animation:fade-up .6s ease-out forwards;}
   </style>
 </head>
-<body class='bg-cyan-50 min-h-screen flex items-center justify-center px-4 text-slate-800'>
+<body class='min-h-screen flex items-center justify-center px-4 text-slate-800'>
   <div class='max-w-xl mx-auto'>
-    <div id='card' class='card bg-white rounded-2xl shadow-xl p-6 card-enter-active'>
+    <div id='card' class='bg-white rounded-2xl shadow-xl p-6 animate-fade-up'>
       <h2 id='title' class='text-xl font-bold mb-3'></h2>
       <p id='explain' class='text-sm text-slate-600 mb-6'></p>
       <div id='options' class='grid gap-4'></div>
       <div class='mt-6 flex items-center space-x-4'>
-        <div class='flex-1 bg-slate-200 rounded-full'><div id='progress' class='h-2 bg-cyan-500 rounded-full w-0'></div></div>
+        <div class='flex-1 bg-slate-200 rounded-full'><div id='progress' class='h-2 bg-rose-400 rounded-full w-0'></div></div>
         <span id='counter' class='text-sm'></span>
       </div>
     </div>
   </div>
 
 <script>
-const questions = [
-  {
-    game:'Repte esportiu',
-    desc:'Vols mantenir-te actiu el cap de setmana; cada activitat té nivell d’adrenalina i risc de lesió diferents.',
-    options:[
-      'Caminar 5 km pel parc',
-      'Ciclisme de carretera suau 20 km',
-      'Escalada indoor en rocòdrom',
-      'Cursa d’obstacles amb fang i salts de 2 m'
-    ]
-  },
-  {
-    game:'Compra de cotxe nou vs ocasió',
-    desc:'Necessites vehicle per treballar. Un cotxe nou té garantia de 5 anys però és més car; el d\'ocasió és barat però pot requerir reparacions cares inesperades.',
-    options:['Cotxe nou amb garantia','Semi-nou certificat','Ocasió amb historial','Subhasta sense historial']
-  },
-  {
-    game:'Assegurança mèdica privada',
-    desc:'La teua empresa ofereix assegurança que costa 600 € l\'any. Sense ella, hi ha un 1 % de probabilitat d\'haver de pagar 20.000 € de la teua butxaca.',
-    options:['Contractar assegurança','Crear fons d\'emergència','Assumir risc sense fons','Ignorar i gastar els diners']
-  },
-  {
-    game:'Sou fix vs comissions',
-    desc:'Oferta A: sou fix de 2.200 €/mes. Oferta B: sou base 1.100 € + comissions que poden doblar el salari però són incertes.',
-    options:['Sou fix 2.200 €','Sou 1.700 € mixte','Sou base i comissió alta','Només comissions (pot ser 0)']
-  },
-  {
-    game:'Loteria solidària',
-    desc:'Pots donar 10 € a una causa i obtindre un bitllet. Premi: 100.000 € amb probabilitat 1/20.000. O pots donar directament els 10 € sabent que ajudaran igualment.',
-    options:['Donar sense bitllet','Comprar 1 bitllet','Comprar per 30 €','Comprar per 100 €']
-  },
-  {
-    game:'Carrera emprenedora',
-    desc:'Et proposen invertir en una start-up amb un 20 % de multiplicar per 10 la inversió i un 60 % de perdre-la. Aportació demanada: 15.000 €.',
-    options:['Rebutjar i estalviar','Invertir 5.000 €','Invertir 15.000 €','Deixar feina i invertir temps complet']
-  },
-  {
-    game:'Hipoteca fixa vs variable',
-    desc:'Hipoteca fixa al 3 % o variable Euríbor +0,3 %. El banc et mostra escenaris: variable podria pujar al 5 % o baixar a l’1 %.',
-    options:['Fixa 3 %','Variable amb sostre','Variable pura','Esperar 2 anys']
-  },
-  {
-    game:'Vacances i assegurança de cancel·lació',
-    desc:'Vacances de 2.000 € no reemborsables o pagar 2.200 € amb assegurança de cancel·lació total. 10 % de probabilitat de no poder viatjar.',
-    options:['Pagar assegurança','Reserva econòmica amb assegurança parcial','Reservar sense assegurança','Esperar última hora']
-  },
-  {
-    game:'Inversió en criptomoneda emergent',
-    desc:'Nou token pot pujar 300 % o caure 90 % en un any. Consideres trading especulatiu.',
-    options:['No invertir','Invertir 500 €','Invertir 1.500 €','Invertir 5.000 € apalancat']
-  },
-  {
-    game:'Fons de jubilació',
-    desc:'Et queden 25 anys per jubilar-te. Pla garantitzat 1 % vs pla variable objectiu 6 %.',
-    options:['Pla garantitzat','Pla objectiu 3 %','Pla variable 6 %','Accions individuals d’alt risc']
-  }
+const questions=[
+  {game:'Repte esportiu',desc:'Vols mantenir-te actiu el cap de setmana; cada activitat té risc diferent.',options:['Caminar 5 km pel parc','Ciclisme de carretera suau 20 km','Escalada indoor en rocòdrom','Cursa d’obstacles amb fang i salts de 2 m']},
+  {game:'Compra de cotxe nou vs ocasió',desc:'Necessites vehicle per treballar. Un cotxe nou té garantia de 5 anys però és més car; el d\'ocasió és barat però pot requerir reparacions cares inesperades.',options:['Cotxe nou amb garantia','Semi-nou certificat','Ocasió amb historial','Subhasta sense historial']},
+  {game:'Assegurança mèdica privada',desc:'La teua empresa ofereix assegurança que costa 600 € l\'any. Sense ella, hi ha un 1 % de probabilitat d\'haver de pagar 20.000 €.',options:['Contractar assegurança','Crear fons d\'emergència','Assumir risc sense fons','Ignorar i gastar els diners']},
+  {game:'Sou fix vs comissions',desc:'Oferta A: sou fix de 2.200 €/mes. Oferta B: base 1.100 € + comissions incertes.',options:['Sou fix 2.200 €','Sou 1.700 € mixte','Sou base i comissió alta','Només comissions']},
+  {game:'Loteria solidària',desc:'Donar 10 € a una causa o comprar bitllets amb premi de 100.000 € (1/20.000).',options:['Donar sense bitllet','Comprar 1 bitllet','Comprar per 30 €','Comprar per 100 €']},
+  {game:'Carrera emprenedora',desc:'Invertir 15.000 € en start‑up amb 20 % d\'èxit (×10) i 60 % de perdre-ho.',options:['Rebutjar i estalviar','Invertir 5.000 €','Invertir 15.000 €','Deixar feina i invertir temps complet']},
+  {game:'Hipoteca fixa vs variable',desc:'Fixa 3 % o variable Euríbor+0,3 %; pot pujar al 5 % o baixar a l’1 %.',options:['Fixa 3 %','Variable amb sostre','Variable pura','Esperar 2 anys']},
+  {game:'Vacances amb assegurança',desc:'Vacances 2.000 € no reemborsables o 2.200 € amb assegurança. 10 % de no poder viatjar.',options:['Pagar assegurança','Reserva econòmica + assegurança parcial','Reservar sense assegurança','Esperar última hora']},
+  {game:'Criptomoneda emergent',desc:'Token que pot pujar 300 % o caure 90 % en un any.',options:['No invertir','Invertir 500 €','Invertir 1.500 €','Invertir 5.000 € apalancat']},
+  {game:'Fons de jubilació',desc:'25 anys per jubilar-te. Pla garantitzat 1 % vs variable 6 %.',options:['Pla garantitzat','Pla objectiu 3 %','Pla variable 6 %','Accions d’alt risc']}
 ];
-
-let idx = 0, score = 0;
+let idx=0,score=0;
 function render(){
-  const q = questions[idx];
-  document.getElementById('title').innerText = q.game;
-  document.getElementById('explain').innerText = q.desc;
-  const optDiv = document.getElementById('options'); optDiv.innerHTML='';
+  const q=questions[idx];
+  document.getElementById('title').innerText=q.game;
+  document.getElementById('explain').innerText=q.desc;
+  const oDiv=document.getElementById('options');oDiv.innerHTML='';
   q.options.forEach((o,i)=>{
     const b=document.createElement('button');
     b.innerText=o;
-    b.className='opt bg-white hover:bg-cyan-100 border-cyan-300';
+    b.className='py-3 px-4 rounded-xl shadow border font-semibold text-left bg-white hover:bg-rose-100 border-rose-300';
     b.onclick=()=>select(i);
-    optDiv.appendChild(b);
+    oDiv.appendChild(b);
   });
-  document.getElementById('counter').innerText = (idx+1)+' / '+questions.length;
-  document.getElementById('progress').style.width = (idx/questions.length*100)+'%';
+  document.getElementById('counter').innerText=(idx+1)+' / '+questions.length;
+  document.getElementById('progress').style.width=(idx/questions.length*100)+'%';
 }
-function select(i){ score += i; idx++; if(idx < questions.length){ render(); } else finish(); }
-function finish(){ localStorage.setItem('riskScore', score); window.location.href='resultat_risc.html'; }
+function select(i){score+=i;idx++;idx<questions.length?render():finish();}
+function finish(){localStorage.setItem('riskScore',score);window.location.href='resultat_risc.html';}
 render();
 </script>
 </body>
 </html>
+
